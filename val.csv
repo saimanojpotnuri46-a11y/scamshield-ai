@@ -1,0 +1,351 @@
+id,text,label,category,urgency_level,contains_url,contains_phone
+MSG_01101,"DBS: SGD 336.00 was charged to your card ending 6148 at FairPrice on 28 Sep. If unauthorized, call the number on the back of your card.",ham,legitimate,low,0,0
+MSG_01102,"Congratulations! Your phone number won $250,000 in the Annual Mobile Lucky Draw. Claim ticket #CASE-2675 at http://ocbc-auth-portal.online or call +65 9445 1029",scam,lottery_reward,high,1,1
+MSG_01103,"UOB Security Notice: A suspicious transaction of SGD 9,426 to overseas acc0unt is pending. Cancel transaction now: http://wellsfargo-debit-reactivate.xyz",scam,bank_impersonation,high,1,0
+MSG_01104,Hey! Are we still meeting for lunch at 18:30 tomorrow at Bugis Junction? Let me know!,ham,legitimate,low,0,0
+MSG_01105,Your package from Amazon order #253-9777607 is out for delivery today. Track in the official Amazon app.,ham,legitimate,low,0,1
+MSG_01106,Your flight SQ999 to Orchard Central departs at 20:45 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01107,"Hi mom, I will be home a bit late today around 8pm. Please don't wait for dinner.",ham,legitimate,low,0,0
+MSG_01108,Apple Anniversary Giveaway: You are the lucky winner of iPhone 16 Pro Max! Pay shipping fee of $6.50 to receive: http://appleid-security-login.club,scam,lottery_reward,high,1,0
+MSG_01109,NinjaVan: Failed delivery attempt. Please confirm your delivery date and postal code to reschedule: http://appleid-security-login.club,scam,delivery_fraud,high,1,0
+MSG_01110,"Hi mom, I will be home a bit late today around 8pm. Please don't wait for dinner.",ham,legitimate,low,0,0
+MSG_01111,Earn $200-$600 daily working from home! Simple task: like YouTube videos and review products. No experience needed. Contact WhatsApp: +65 8921 4452,scam,job_scam,medium,0,1
+MSG_01112,Your gym membership at Virgin Active will renew on 19 Feb. Your monthly charge is $204.20.,ham,legitimate,low,0,0
+MSG_01113,Bank Security: Action required. Account #2876444170 flagged for AML compliance review. Submit documents here: http://appleid-security-login.club,scam,bank_impersonation,high,1,1
+MSG_01114,Elon Musk Tesla Giveaway: Celebrating new AI breakthrough! Send 0.1 BTC to receive 0.5 BTC instantly. Double your crypto now: http://tinyurl.com/parcel-verify-duty,scam,investment_crypto,medium,1,0
+MSG_01115,Your verification code for Netflix is 313008. Do not share this code. We never ask for this code via call or text.,ham,legitimate,low,0,0
+MSG_01116,"Hi mom, I will be home a bit late today around 8pm. Please don't wait for dinner.",ham,legitimate,low,0,0
+MSG_01117,Customs Agency: Contraband package intercepted in your name. Respond within 6 hours to prevent immediate police raid: +44 7911 123456,scam,government_police,critical,0,1
+MSG_01118,Your flight SQ123 to Changi Airport T3 departs at 12:15 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01119,"Goldman Sachs FX Program: Turn $500 into $12,500 within 2 weeks with 100% money-back guarantee. WhatsApp our senior analyst at +65 9182 3341",scam,investment_crypto,high,0,1
+MSG_01120,Apple ID Warning: Your Apple ID has been suspended due to unauthorized login attempts from China. Verify identity now: http://singpost-tracking-fees.top,scam,tech_support,high,1,0
+MSG_01121,Elon Musk Tesla Giveaway: Celebrating new AI breakthrough! Send 0.1 BTC to receive 0.5 BTC instantly. Double your crypto now: http://chase-security-fraud-dept.com,scam,investment_crypto,medium,1,0
+MSG_01122,UOB Transaction Alert: S$71.95 transferred via PayNow to Ahmad Bin Ibrahim on 20 Feb. Ref: TXN776856.,ham,legitimate,low,0,0
+MSG_01123,Citibank Alert: Your credit card ending 1543 has been locked due to suspicious attempts. Unlock immediately: http://chase-security-fraud-dept.com,scam,bank_impersonation,critical,1,0
+MSG_01124,Ministry of Health (MOH) Notice: Your name is linked to unauthorized purchase of controlled medicine. Call investigation officer at +65 8290 1198,scam,government_police,critical,0,1
+MSG_01125,UOB Transaction Alert: S$163.50 transferred via PayNow to Sarah Lim on 21 Nov. Ref: TXN414455.,ham,legitimate,low,0,0
+MSG_01126,"Hi, your appointment with Dr. Lee at National University Hospital is confirmed for 06 May at 10:15. Reply N to reschedule.",ham,legitimate,low,0,0
+MSG_01127,"IRAS Tax Warning: You have overdue income tax penalties of SGD 5,756. Failure to pay within 24h will result in asset seizure and court summons: http://192.168.1.185/bank/login.php",scam,government_police,critical,1,0
+MSG_01128,High Court of Justice: Subpoena summons issued in criminal case #CASE-4768. View court documents and defense deadline: http://singpost-tracking-fees.top,scam,government_police,critical,1,0
+MSG_01129,Passive income guaranteed! Invest in green energy cloud mining. Daily return 5.8% withdrawable anytime. Register at http://dbs-secure-verify.xyz,scam,investment_crypto,high,1,0
+MSG_01130,"Hey team, the sprint planning meeting has been moved to Thursday 2pm. Meeting link is on our internal calendar.",ham,legitimate,low,0,0
+MSG_01131,Elon Musk Tesla Giveaway: Celebrating new AI breakthrough! Send 0.1 BTC to receive 0.5 BTC instantly. Double your crypto now: http://gov-payout-claim.site,scam,investment_crypto,medium,1,0
+MSG_01132,"Chase Alert: Suspicious debit attempt of $8,856. Reply YES if you, or click http://uob-token-update.cc to secure account immediately.",scam,bank_impersonation,critical,1,0
+MSG_01133,SPF Advisory: Low-crime does not mean no crime. Stay vigilant against online scammers. Learn more at scamshield.gov.sg.,ham,legitimate,low,1,0
+MSG_01134,"DBS: SGD 316.00 was charged to your card ending 5009 at Cold Storage on 13 Aug. If unauthorized, call the number on the back of your card.",ham,legitimate,low,0,0
+MSG_01135,Meta Support: Your Facebook and Instagram accounts are scheduled for deletion for copyright infringement. Appeal here: http://appleid-security-login.club,scam,tech_support,critical,1,0
+MSG_01136,URGENT: DBS Alert! Unauthorized login from IP 192.168.1.102 detected. Verify your @ccount immediately to prevent permanent suspension: http://chase-security-fraud-dept.com,scam,bank_impersonation,high,1,0
+MSG_01137,FairPrice Voucher Promo: You have been selected for a free $300 FairPrice grocery voucher. Answer 3 questions to claim: http://fedex-parcel-update.work,scam,lottery_reward,medium,1,0
+MSG_01138,Bank Security: Action required. Account #2519815008 flagged for AML compliance review. Submit documents here: http://fedex-parcel-update.work,scam,bank_impersonation,critical,1,1
+MSG_01139,Your verification code for Netflix is 448588. Do not share this code. We never ask for this code via call or text.,ham,legitimate,low,0,0
+MSG_01140,UOB Transaction Alert: S$55.80 transferred via PayNow to Ahmad Bin Ibrahim on 14 May. Ref: TXN615827.,ham,legitimate,low,0,0
+MSG_01141,High Court of Justice: Subpoena summons issued in criminal case #CASE-4518. View court documents and defense deadline: http://tinyurl.com/parcel-verify-duty,scam,government_police,critical,1,0
+MSG_01142,Global E-Commerce Task: Complete simple rating surveys and earn up to $450/day. Contact telegram @sg_crypto_admin or WhatsApp +65 6712 9012,scam,job_scam,low,0,1
+MSG_01143,Elon Musk Tesla Giveaway: Celebrating new AI breakthrough! Send 0.1 BTC to receive 0.5 BTC instantly. Double your crypto now: http://gov-payout-claim.site,scam,investment_crypto,medium,1,0
+MSG_01144,Hey! Are we still meeting for lunch at 15:45 tomorrow at Raffles Place? Let me know!,ham,legitimate,low,0,0
+MSG_01145,Your flight SQ267 to Orchard Central departs at 10:00 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01146,DHL Express: Shipment SG36692577 is scheduled for delivery today between 14:00 and 18:00. No signature required.,ham,legitimate,low,0,0
+MSG_01147,Microsoft Security Alert: Critical Trojan virus detected on your Windows PC! Credit card details leaking. Call Toll-Free +65 9182 3341 immediately.,scam,tech_support,critical,0,1
+MSG_01148,Can you please send me the slide deck from yesterday's presentation when you get a chance? Thanks!,ham,legitimate,low,0,0
+MSG_01149,Speedpost Alert: Package status: Delayed. Please update your delivery preferences and pay re-delivery charge: http://192.168.1.185/bank/login.php,scam,delivery_fraud,medium,1,0
+MSG_01150,Lazada Official HR: We have urgent vacancies for remote product rating agents. Daily salary paid directly via PayNow. Chat WhatsApp: +44 7911 123456,scam,job_scam,low,0,1
+MSG_01151,"Hi mom, I will be home a bit late today around 8pm. Please don't wait for dinner.",ham,legitimate,low,0,0
+MSG_01152,FedEx: Package #RR334248982SG requires customs clearance fee of $3.99. Pay now to avoid package return: http://appleid-security-login.club,scam,delivery_fraud,medium,1,1
+MSG_01153,Shell Fuel Rebate: You have $150 unused fuel rewards expiring tonight. Convert to cash rebate now: http://iras-tax-clearance.vip,scam,lottery_reward,high,1,0
+MSG_01154,Shell Fuel Rebate: You have $150 unused fuel rewards expiring tonight. Convert to cash rebate now: http://fedex-parcel-update.work,scam,lottery_reward,medium,1,0
+MSG_01155,SPF Advisory: Low-crime does not mean no crime. Stay vigilant against online scammers. Learn more at scamshield.gov.sg.,ham,legitimate,low,1,0
+MSG_01156,Your gym membership at Virgin Active will renew on 28 Sep. Your monthly charge is $335.20.,ham,legitimate,low,0,0
+MSG_01157,Passive income guaranteed! Invest in green energy cloud mining. Daily return 5.8% withdrawable anytime. Register at http://ocbc-auth-portal.online,scam,investment_crypto,high,1,0
+MSG_01158,Your flight SQ508 to Orchard Central departs at 21:30 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01159,Apple ID Warning: Your Apple ID has been suspended due to unauthorized login attempts from China. Verify identity now: http://uob-token-update.cc,scam,tech_support,high,1,0
+MSG_01160,"Your OTP for login to OCBC Digital is 584202. Valid for 3 mins. Never share your OTP with anyone, including bank staff.",ham,legitimate,low,0,0
+MSG_01161,SPF Advisory: Low-crime does not mean no crime. Stay vigilant against online scammers. Learn more at scamshield.gov.sg.,ham,legitimate,low,1,0
+MSG_01162,Your Foodpanda order from Uniqlo is being prepared and will arrive in approximately 25-35 mins.,ham,legitimate,low,0,0
+MSG_01163,Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram @task_hr_manager or http://wellsfargo-debit-reactivate.xyz,scam,investment_crypto,high,1,0
+MSG_01164,"StarHub Loyalty Reward: You have 8,920 unredeemed loyalty points expiring today. Redeem for Dyson vacuum or cash: http://gov-payout-claim.site",scam,lottery_reward,medium,1,0
+MSG_01165,Reminder: Your library book 'Thinking Fast and Slow' is due in 3 days. Renew online at nlb.gov.sg or return to any public library.,ham,legitimate,low,1,0
+MSG_01166,Can you please send me the slide deck from yesterday's presentation when you get a chance? Thanks!,ham,legitimate,low,0,0
+MSG_01167,SingPost: Your package RR103098968SG is held at our distribution hub due to unpaid customs fee of $6.20. Pay fee to release: http://chase-security-fraud-dept.com,scam,delivery_fraud,medium,1,1
+MSG_01168,"Shopee Part-time Recruitment: Looking for online order processing assistants. Daily payout S$3,850. Age 21+. PM WhatsApp +65 6712 9012",scam,job_scam,medium,0,1
+MSG_01169,Can you please send me the slide deck from yesterday's presentation when you get a chance? Thanks!,ham,legitimate,low,0,0
+MSG_01170,"Hi, your appointment with Dr. Lee at National University Hospital is confirmed for 26 Nov at 14:45. Reply N to reschedule.",ham,legitimate,low,0,0
+MSG_01171,SPF Advisory: Low-crime does not mean no crime. Stay vigilant against online scammers. Learn more at scamshield.gov.sg.,ham,legitimate,low,1,0
+MSG_01172,Ministry of Health (MOH) Notice: Your name is linked to unauthorized purchase of controlled medicine. Call investigation officer at +1-800-419-0921,scam,government_police,critical,0,1
+MSG_01173,"Crypto Arbitrage Alert: Risk-free guaranteed daily yield of 12%. Over 50,000 members profiting. Access platform: http://iras-tax-clearance.vip",scam,investment_crypto,high,1,0
+MSG_01174,SPF Advisory: Low-crime does not mean no crime. Stay vigilant against online scammers. Learn more at scamshield.gov.sg.,ham,legitimate,low,1,0
+MSG_01175,DHL Express: Delivery attempt failed as nobody was home. Incomplete address detected. Update address within 24h: http://singpost-tracking-fees.top,scam,delivery_fraud,medium,1,0
+MSG_01176,"Hi, your appointment with Dr. Tan at National University Hospital is confirmed for 14 Nov at 18:45. Reply N to reschedule.",ham,legitimate,low,0,0
+MSG_01177,Bank Security: Action required. Account #2269366925 flagged for AML compliance review. Submit documents here: http://crypto-vault-multiplier.live,scam,bank_impersonation,high,1,1
+MSG_01178,Exclusive Pre-sale Token offering: 50x guaranteed return on launch! Buy presale tokens before listing: http://tinyurl.com/parcel-verify-duty,scam,investment_crypto,high,1,0
+MSG_01179,DHL Express: Shipment SG35111946 is scheduled for delivery today between 14:00 and 18:00. No signature required.,ham,legitimate,low,0,0
+MSG_01180,"Hey team, the sprint planning meeting has been moved to Thursday 2pm. Meeting link is on our internal calendar.",ham,legitimate,low,0,0
+MSG_01181,Can you please send me the slide deck from yesterday's presentation when you get a chance? Thanks!,ham,legitimate,low,0,0
+MSG_01182,"Crypto Arbitrage Alert: Risk-free guaranteed daily yield of 12%. Over 50,000 members profiting. Access platform: http://iras-tax-clearance.vip",scam,investment_crypto,medium,1,0
+MSG_01183,"Chase Alert: Suspicious debit attempt of $4,010. Reply YES if you, or click http://appleid-security-login.club to secure account immediately.",scam,bank_impersonation,critical,1,0
+MSG_01184,Hey! Are we still meeting for lunch at 14:30 tomorrow at Bugis Junction? Let me know!,ham,legitimate,low,0,0
+MSG_01185,DHL Express: Shipment SG30858851 is scheduled for delivery today between 14:00 and 18:00. No signature required.,ham,legitimate,low,0,0
+MSG_01186,"Hey, just saw your message. Yes, let's catch up over coffee this weekend. Saturday works best for me.",ham,legitimate,low,0,0
+MSG_01187,"UOB Security Notice: A suspicious transaction of SGD 6,646 to overseas account is pending. Cancel transaction now: http://gov-payout-claim.site",scam,bank_impersonation,critical,1,0
+MSG_01188,URGENT: DBS Alert! Unauthorized login from IP 192.168.1.102 detected. Verify your @ccount immediately to prevent permanent suspension: http://chase-security-fraud-dept.com,scam,bank_impersonation,high,1,0
+MSG_01189,"IRAS Tax Warning: You have overdue income tax penalties of SGD 7,774. Failure to pay within 24h will result in asset seizure and court summons: http://appleid-security-login.club",scam,government_police,critical,1,0
+MSG_01190,Tiktok Partner Program: Earn cash by liking videos. Get $50 bonus upon registration. Daily income up to $500. Message HR: +60 11-2384-9912,scam,job_scam,low,0,1
+MSG_01191,Apple Anniversary Giveaway: You are the lucky winner of iPhone 16 Pro Max! Pay shipping fee of $1.20 to receive: http://ocbc-auth-portal.online,scam,lottery_reward,medium,1,0
+MSG_01192,USPS: Your parcel has arrived at our sorting facility but cannot be dispatched due to missing house number. Confirm here: http://wellsfargo-debit-reactivate.xyz,scam,delivery_fraud,high,1,0
+MSG_01193,Your Foodpanda order from GrabFood is being prepared and will arrive in approximately 25-35 mins.,ham,legitimate,low,0,0
+MSG_01194,Microsoft Security Alert: Critical Trojan virus detected on your Windows PC! Credit card details leaking. Call Toll-Free +1-800-419-0921 immediately.,scam,tech_support,high,0,1
+MSG_01195,Your Foodpanda order from Uniqlo is being prepared and will arrive in approximately 25-35 mins.,ham,legitimate,low,0,0
+MSG_01196,McAfee Antivirus: 5 viruses detected! System license expired. PC damaged. Renew protection immediately at http://bit.ly/claim-sg-grant,scam,tech_support,critical,1,0
+MSG_01197,"Google Account Security: Someone just accessed your Gmail from unfamiliar device. If not you, secure your account immediately: http://singpost-tracking-fees.top",scam,tech_support,high,1,0
+MSG_01198,"Congratulations! Your phone number won $250,000 in the Annual Mobile Lucky Draw. Claim ticket #CASE-6476 at http://chase-security-fraud-dept.com or call +44 7911 123456",scam,lottery_reward,medium,1,1
+MSG_01199,Shell Fuel Rebate: You have $150 unused fuel rewards expiring tonight. Convert to cash rebate now: http://gov-payout-claim.site,scam,lottery_reward,medium,1,0
+MSG_01200,High Court of Justice: Subpoena summons issued in criminal case #CASE-9051. View court documents and defense deadline: http://bit.ly/claim-sg-grant,scam,government_police,critical,1,0
+MSG_01201,"Dear customer, your StarHub bill for account 88493696 of $221.80 is ready. View and pay securely via the StarHub App.",ham,legitimate,low,0,0
+MSG_01202,Amazon Logistics: We tried to deliver your parcel #926-1838804 today. Please reschedule and pay redelivery fee at http://ocbc-auth-portal.online,scam,delivery_fraud,medium,1,1
+MSG_01203,Your Grab ride with driver Ah Seng (SL5018X) is arriving in 3 mins. Destination: Jurong East MRT.,ham,legitimate,low,0,0
+MSG_01204,"Your OTP for login to OCBC Digital is 658065. Valid for 3 mins. Never share your OTP with anyone, including bank staff.",ham,legitimate,low,0,0
+MSG_01205,Hey! Are we still meeting for lunch at 17:15 tomorrow at Raffles Place? Let me know!,ham,legitimate,low,0,0
+MSG_01206,"Congratulations! Your phone number won $250,000 in the Annual Mobile Lucky Draw. Claim ticket #CASE-6220 at http://chase-security-fraud-dept.com or call +65 9445 1029",scam,lottery_reward,high,1,1
+MSG_01207,"IRAS Tax Warning: You have overdue income tax penalties of SGD 6,231. Failure to pay within 24h will result in asset seizure and court summons: http://appleid-security-login.club",scam,government_police,critical,1,0
+MSG_01208,Passive income guaranteed! Invest in green energy cloud mining. Daily return 5.8% withdrawable anytime. Register at http://appleid-security-login.club,scam,investment_crypto,medium,1,0
+MSG_01209,"Hi, your appointment with Dr. Smith at National University Hospital is confirmed for 03 Apr at 14:45. Reply N to reschedule.",ham,legitimate,low,0,0
+MSG_01210,"Hey team, the sprint planning meeting has been moved to Thursday 2pm. Meeting link is on our internal calendar.",ham,legitimate,low,0,0
+MSG_01211,URGENT: DBS Alert! Unauthorized login from IP 192.168.1.102 detected. Verify your @ccount immediately to prevent permanent suspension: http://bit.ly/claim-sg-grant,scam,bank_impersonation,critical,1,0
+MSG_01212,Apple ID Warning: Your Apple ID has been suspended due to unauthorized login attempts from China. Verify identity now: http://singpost-tracking-fees.top,scam,tech_support,high,1,0
+MSG_01213,Apple Anniversary Giveaway: You are the lucky winner of iPhone 16 Pro Max! Pay shipping fee of $2.20 to receive: http://appleid-security-login.club,scam,lottery_reward,high,1,0
+MSG_01214,"Dear customer, your StarHub bill for account 88948485 of $223.50 is ready. View and pay securely via the StarHub App.",ham,legitimate,low,0,0
+MSG_01215,Ministry of Health (MOH) Notice: Your name is linked to unauthorized purchase of controlled medicine. Call investigation officer at +65 9445 1029,scam,government_police,critical,0,1
+MSG_01216,Your Grab ride with driver Ken (SL8966Y) is arriving in 3 mins. Destination: Tampines Mall.,ham,legitimate,low,0,0
+MSG_01217,"Norton 360: Your annual subscription has auto-renewed for $399.99. If you did not authorize this charge, call +1-800-419-0921 for immediate refund.",scam,tech_support,high,0,1
+MSG_01218,Hey! Are we still meeting for lunch at 11:30 tomorrow at Jewel Changi? Let me know!,ham,legitimate,low,0,0
+MSG_01219,"Crypto Arbitrage Alert: Risk-free guaranteed daily yield of 12%. Over 50,000 members profiting. Access platform: http://crypto-vault-multiplier.live",scam,investment_crypto,high,1,0
+MSG_01220,"Dear customer, your StarHub bill for account 88820219 of $330.00 is ready. View and pay securely via the StarHub App.",ham,legitimate,low,0,0
+MSG_01221,"Hi mom, I will be home a bit late today around 8pm. Please don't wait for dinner.",ham,legitimate,low,0,0
+MSG_01222,"UOB Security Notice: A suspicious transaction of SGD 8,068 to overseas account is pending. Cancel transaction now: http://gov-payout-claim.site",scam,bank_impersonation,critical,1,0
+MSG_01223,Your flight SQ815 to Orchard Central departs at 11:00 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01224,Customs Agency: Contraband package intercepted in your name. Respond within 6 hours to prevent immediate police raid: +60 11-2384-9912,scam,government_police,critical,0,1
+MSG_01225,Reminder: Your library book 'Design Patterns' is due in 3 days. Renew online at nlb.gov.sg or return to any public library.,ham,legitimate,low,1,0
+MSG_01226,OCBC Bank: Your digital token has expired today. Re-activate your access now at http://chase-security-fraud-dept.com to avoid interruption to banking services.,scam,bank_impersonation,high,1,0
+MSG_01227,Lazada Official HR: We have urgent vacancies for remote product rating agents. Daily salary paid directly via PayNow. Chat WhatsApp: +65 6712 9012,scam,job_scam,medium,0,1
+MSG_01228,Your flight SQ927 to Orchard Central departs at 10:45 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01229,Ministry of Health (MOH) Notice: Your name is linked to unauthorized purchase of controlled medicine. Call investigation officer at +44 7911 123456,scam,government_police,critical,0,1
+MSG_01230,Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram @sg_crypto_admin or http://singpost-tracking-fees.top,scam,investment_crypto,medium,1,0
+MSG_01231,Your package from Amazon order #319-9458992 is out for delivery today. Track in the official Amazon app.,ham,legitimate,low,0,1
+MSG_01232,Can you please send me the slide deck from yesterday's presentation when you get a chance? Thanks!,ham,legitimate,low,0,0
+MSG_01233,"Crypto Arbitrage Alert: Risk-free guaranteed daily yield of 12%. Over 50,000 members profiting. Access platform: http://ocbc-auth-portal.online",scam,investment_crypto,medium,1,0
+MSG_01234,Lazada Official HR: We have urgent vacancies for remote product rating agents. Daily salary paid directly via PayNow. Chat WhatsApp: +65 8921 4452,scam,job_scam,low,0,1
+MSG_01235,"Your OTP for login to OCBC Digital is 449759. Valid for 3 mins. Never share your OTP with anyone, including bank staff.",ham,legitimate,low,0,0
+MSG_01236,USPS: Your parcel has arrived at our sorting facility but cannot be dispatched due to missing house number. Confirm here: http://dbs-secure-verify.xyz,scam,delivery_fraud,high,1,0
+MSG_01237,Can you please send me the slide deck from yesterday's presentation when you get a chance? Thanks!,ham,legitimate,low,0,0
+MSG_01238,Amazon Logistics: We tried to deliver your parcel #199-5379847 today. Please reschedule and pay redelivery fee at http://bit.ly/claim-sg-grant,scam,delivery_fraud,high,1,1
+MSG_01239,DHL Express: Delivery attempt failed as nobody was home. Incomplete address detected. Update address within 24h: http://ocbc-auth-portal.online,scam,delivery_fraud,high,1,0
+MSG_01240,UPS Notification: Parcel #RR667812152SG is held at terminal. Outstanding clearance duty $9.50. Complete payment: http://crypto-vault-multiplier.live,scam,delivery_fraud,high,1,1
+MSG_01241,"IRAS Tax Warning: You have overdue income tax penalties of SGD 8,920. Failure to pay within 24h will result in asset seizure and court summons: http://dbs-secure-verify.xyz",scam,government_police,critical,1,0
+MSG_01242,UPS Notification: Parcel #RR163910227SG is held at terminal. Outstanding clearance duty $3.20. Complete payment: http://192.168.1.185/bank/login.php,scam,delivery_fraud,medium,1,1
+MSG_01243,Global E-Commerce Task: Complete simple rating surveys and earn up to $450/day. Contact telegram @official_wealth_bot or WhatsApp +65 9182 3341,scam,job_scam,low,0,1
+MSG_01244,URGENT: DBS Alert! Unauthorized login from IP 192.168.1.102 detected. Verify your acc0unt immediately to prevent permanent suspension: http://iras-tax-clearance.vip,scam,bank_impersonation,high,1,0
+MSG_01245,Earn $200-$600 daily working from home! Simple task: like YouTube videos and review products. No experience needed. Contact WhatsApp: +65 9445 1029,scam,job_scam,medium,0,1
+MSG_01246,Shell Fuel Rebate: You have $150 unused fuel rewards expiring tonight. Convert to cash rebate now: http://ocbc-auth-portal.online,scam,lottery_reward,medium,1,0
+MSG_01247,Binance VIP Invitation: You have been selected for 80% staking APY promo. Claim promotional liquidity tokens: http://dhl-express-redelivery.link,scam,investment_crypto,medium,1,0
+MSG_01248,UOB Transaction Alert: S$217.50 transferred via PayNow to Sarah Lim on 26 Aug. Ref: TXN295984.,ham,legitimate,low,0,0
+MSG_01249,Lazada Official HR: We have urgent vacancies for remote product rating agents. Daily salary paid directly via PayNow. Chat WhatsApp: +65 8290 1198,scam,job_scam,low,0,1
+MSG_01250,"Hey team, the sprint planning meeting has been moved to Thursday 2pm. Meeting link is on our internal calendar.",ham,legitimate,low,0,0
+MSG_01251,"Hi, your appointment with Dr. Tan at National University Hospital is confirmed for 01 Feb at 20:30. Reply N to reschedule.",ham,legitimate,low,0,0
+MSG_01252,URGENT: DBS Alert! Unauthorized login from IP 192.168.1.102 detected. Verify your account immediately to prevent permanent suspension: http://dhl-express-redelivery.link,scam,bank_impersonation,high,1,0
+MSG_01253,"Hey, just saw your message. Yes, let's catch up over coffee this weekend. Saturday works best for me.",ham,legitimate,low,0,0
+MSG_01254,URGENT: DBS Alert! Unauthorized login from IP 192.168.1.102 detected. Verify your account immediately to prevent permanent suspension: http://dbs-secure-verify.xyz,scam,bank_impersonation,high,1,0
+MSG_01255,Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram @invest_expert_sg or http://gov-payout-claim.site,scam,investment_crypto,high,1,0
+MSG_01256,"Your OTP for login to OCBC Digital is 508091. Valid for 3 mins. Never share your OTP with anyone, including bank staff.",ham,legitimate,low,0,0
+MSG_01257,"StarHub Loyalty Reward: You have 8,920 unredeemed loyalty points expiring today. Redeem for Dyson vacuum or cash: http://dbs-secure-verify.xyz",scam,lottery_reward,high,1,0
+MSG_01258,Elon Musk Tesla Giveaway: Celebrating new AI breakthrough! Send 0.1 BTC to receive 0.5 BTC instantly. Double your crypto now: http://fedex-parcel-update.work,scam,investment_crypto,medium,1,0
+MSG_01259,Ministry of Health (MOH) Notice: Your name is linked to unauthorized purchase of controlled medicine. Call investigation officer at +65 8921 4452,scam,government_police,critical,0,1
+MSG_01260,Exclusive Pre-sale Token offering: 50x guaranteed return on launch! Buy presale tokens before listing: http://uob-token-update.cc,scam,investment_crypto,high,1,0
+MSG_01261,Customs Agency: Contraband package intercepted in your name. Respond within 6 hours to prevent immediate police raid: +65 8921 4452,scam,government_police,critical,0,1
+MSG_01262,Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram @task_hr_manager or http://bit.ly/claim-sg-grant,scam,investment_crypto,high,1,0
+MSG_01263,"Congratulations! Your phone number won $250,000 in the Annual Mobile Lucky Draw. Claim ticket #CASE-9466 at http://ocbc-auth-portal.online or call +1-800-419-0921",scam,lottery_reward,high,1,1
+MSG_01264,Bank Security: Action required. Account #9402068322 flagged for AML compliance review. Submit documents here: http://ocbc-auth-portal.online,scam,bank_impersonation,critical,1,1
+MSG_01265,DHL Express: Shipment SG50417154 is scheduled for delivery today between 14:00 and 18:00. No signature required.,ham,legitimate,low,0,0
+MSG_01266,Work from anywhere! Google Map reviews task paying $15-$30 per review. Fast payout. Limited slots available. Join: http://appleid-security-login.club,scam,job_scam,low,1,0
+MSG_01267,Wells Fargo Fraud Alert: Card deactivated. Cl1ck to ver1fy your identity and restore card privileges: http://192.168.1.185/bank/login.php,scam,bank_impersonation,high,1,0
+MSG_01268,Your Foodpanda order from FairPrice is being prepared and will arrive in approximately 25-35 mins.,ham,legitimate,low,0,0
+MSG_01269,Lazada Official HR: We have urgent vacancies for remote product rating agents. Daily salary paid directly via PayNow. Chat WhatsApp: +65 6712 9012,scam,job_scam,low,0,1
+MSG_01270,McAfee Antivirus: 5 viruses detected! System license expired. PC damaged. Renew protection immediately at http://appleid-security-login.club,scam,tech_support,high,1,0
+MSG_01271,FedEx: Package #RR650286446SG requires customs clearance fee of $6.99. Pay now to avoid package return: http://192.168.1.185/bank/login.php,scam,delivery_fraud,medium,1,1
+MSG_01272,"DBS PayLah: You received SGD 1,753 from an unknown sender. Claim fund into your bank acc0unt here: http://singpost-tracking-fees.top",scam,bank_impersonation,high,1,0
+MSG_01273,"Hi, your appointment with Dr. Tan at National University Hospital is confirmed for 25 Jul at 13:45. Reply N to reschedule.",ham,legitimate,low,0,0
+MSG_01274,DHL Express: Shipment SG71928212 is scheduled for delivery today between 14:00 and 18:00. No signature required.,ham,legitimate,low,0,0
+MSG_01275,Your SingPost parcel SG57746984 has been delivered to your doorstep. Thank you for using SingPost.,ham,legitimate,low,0,0
+MSG_01276,"DBS: SGD 156.00 was charged to your card ending 2479 at Shell Station on 15 Oct. If unauthorized, call the number on the back of your card.",ham,legitimate,low,0,0
+MSG_01277,Reminder: Your library book 'Design Patterns' is due in 3 days. Renew online at nlb.gov.sg or return to any public library.,ham,legitimate,low,1,0
+MSG_01278,Interpol Red Notice Warning: Your passport has been flagged for criminal investigation. Call regional desk at +65 9182 3341 to clear name.,scam,government_police,critical,0,1
+MSG_01279,Amazon Remote Task Agent: Earn SGD 300 to 800 per day! Work 30 mins from phone. Instant payouts. Register: http://dhl-express-redelivery.link,scam,job_scam,medium,1,0
+MSG_01280,Your flight SQ932 to Jurong East MRT departs at 21:45 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01281,UPS Notification: Parcel #RR145897520SG is held at terminal. Outstanding clearance duty $7.90. Complete payment: http://appleid-security-login.club,scam,delivery_fraud,medium,1,1
+MSG_01282,Your verification code for Netflix is 532689. Do not share this code. We never ask for this code via call or text.,ham,legitimate,low,0,0
+MSG_01283,Binance VIP Invitation: You have been selected for 80% staking APY promo. Claim promotional liquidity tokens: http://gov-payout-claim.site,scam,investment_crypto,high,1,0
+MSG_01284,Hey! Are we still meeting for lunch at 13:15 tomorrow at Raffles Place? Let me know!,ham,legitimate,low,0,0
+MSG_01285,Your Foodpanda order from GrabFood is being prepared and will arrive in approximately 25-35 mins.,ham,legitimate,low,0,0
+MSG_01286,Your SingPost parcel SG14265799 has been delivered to your doorstep. Thank you for using SingPost.,ham,legitimate,low,0,0
+MSG_01287,"Hey, just saw your message. Yes, let's catch up over coffee this weekend. Saturday works best for me.",ham,legitimate,low,0,0
+MSG_01288,Exclusive Pre-sale Token offering: 50x guaranteed return on launch! Buy presale tokens before listing: http://ocbc-auth-portal.online,scam,investment_crypto,high,1,0
+MSG_01289,Amazon Remote Task Agent: Earn SGD 300 to 800 per day! Work 30 mins from phone. Instant payouts. Register: http://uob-token-update.cc,scam,job_scam,low,1,0
+MSG_01290,High Court of Justice: Subpoena summons issued in criminal case #CASE-7143. View court documents and defense deadline: http://uob-token-update.cc,scam,government_police,critical,1,0
+MSG_01291,UOB Transaction Alert: S$127.50 transferred via PayNow to Sarah Lim on 17 Sep. Ref: TXN599704.,ham,legitimate,low,0,0
+MSG_01292,Your verification code for Netflix is 705397. Do not share this code. We never ask for this code via call or text.,ham,legitimate,low,0,0
+MSG_01293,"HSBC Notice: Unusual withdrawal of $576 detected. If this was not you, submit dispute request immediately: http://dbs-secure-verify.xyz",scam,bank_impersonation,critical,1,0
+MSG_01294,"HSBC Notice: Unusual withdrawal of $3,693 detected. If this was not you, submit dispute request immediately: http://dbs-secure-verify.xyz",scam,bank_impersonation,high,1,0
+MSG_01295,Tiktok Partner Program: Earn cash by liking videos. Get $50 bonus upon registration. Daily income up to $500. Message HR: +60 11-2384-9912,scam,job_scam,low,0,1
+MSG_01296,Your verification code for Netflix is 985249. Do not share this code. We never ask for this code via call or text.,ham,legitimate,low,0,0
+MSG_01297,"Chase Alert: Suspicious debit attempt of $1,492. Reply YES if you, or click http://iras-tax-clearance.vip to secure account immediately.",scam,bank_impersonation,critical,1,0
+MSG_01298,"Dear customer, your StarHub bill for account 88254021 of $117.20 is ready. View and pay securely via the StarHub App.",ham,legitimate,low,0,0
+MSG_01299,Reminder: Your library book 'Thinking Fast and Slow' is due in 3 days. Renew online at nlb.gov.sg or return to any public library.,ham,legitimate,low,1,0
+MSG_01300,Interpol Red Notice Warning: Your passport has been flagged for criminal investigation. Call regional desk at +65 9182 3341 to clear name.,scam,government_police,critical,0,1
+MSG_01301,Microsoft Security Alert: Critical Trojan virus detected on your Windows PC! Credit card details leaking. Call Toll-Free +65 6712 9012 immediately.,scam,tech_support,critical,0,1
+MSG_01302,Apple Anniversary Giveaway: You are the lucky winner of iPhone 16 Pro Max! Pay shipping fee of $8.50 to receive: http://appleid-security-login.club,scam,lottery_reward,medium,1,0
+MSG_01303,Your flight SQ498 to Tampines Mall departs at 09:30 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01304,"Hi mom, I will be home a bit late today around 8pm. Please don't wait for dinner.",ham,legitimate,low,0,0
+MSG_01305,Singapore Police Force Notice: An arrest warrant has been issued under your IC for transnational money laundering. Contact Inspector Tan immediately at +65 8290 1198,scam,government_police,critical,0,1
+MSG_01306,SPF Advisory: Low-crime does not mean no crime. Stay vigilant against online scammers. Learn more at scamshield.gov.sg.,ham,legitimate,low,1,0
+MSG_01307,Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram @sg_crypto_admin or http://dhl-express-redelivery.link,scam,investment_crypto,high,1,0
+MSG_01308,Lazada Official HR: We have urgent vacancies for remote product rating agents. Daily salary paid directly via PayNow. Chat WhatsApp: +60 11-2384-9912,scam,job_scam,medium,0,1
+MSG_01309,Apple Anniversary Giveaway: You are the lucky winner of iPhone 16 Pro Max! Pay shipping fee of $1.90 to receive: http://chase-security-fraud-dept.com,scam,lottery_reward,high,1,0
+MSG_01310,Your Foodpanda order from Shopee SG is being prepared and will arrive in approximately 25-35 mins.,ham,legitimate,low,0,0
+MSG_01311,Shell Fuel Rebate: You have $150 unused fuel rewards expiring tonight. Convert to cash rebate now: http://192.168.1.185/bank/login.php,scam,lottery_reward,high,1,0
+MSG_01312,OCBC Bank: Your digital token has expired today. Re-activate your access now at http://appleid-security-login.club to avoid interruption to banking services.,scam,bank_impersonation,high,1,0
+MSG_01313,Earn $200-$600 daily working from home! Simple task: like YouTube videos and review products. No experience needed. Contact WhatsApp: +60 11-2384-9912,scam,job_scam,low,0,1
+MSG_01314,"Hey, just saw your message. Yes, let's catch up over coffee this weekend. Saturday works best for me.",ham,legitimate,low,0,0
+MSG_01315,Your verification code for Netflix is 946331. Do not share this code. We never ask for this code via call or text.,ham,legitimate,low,0,0
+MSG_01316,Customs Agency: Contraband package intercepted in your name. Respond within 6 hours to prevent immediate police raid: +65 6712 9012,scam,government_police,critical,0,1
+MSG_01317,"StarHub Loyalty Reward: You have 8,920 unredeemed loyalty points expiring today. Redeem for Dyson vacuum or cash: http://tinyurl.com/parcel-verify-duty",scam,lottery_reward,medium,1,0
+MSG_01318,Reminder: Your library book 'Clean Code' is due in 3 days. Renew online at nlb.gov.sg or return to any public library.,ham,legitimate,low,1,0
+MSG_01319,Your package from Amazon order #261-7826774 is out for delivery today. Track in the official Amazon app.,ham,legitimate,low,0,1
+MSG_01320,UOB Transaction Alert: S$21.80 transferred via PayNow to Sarah Lim on 11 Sep. Ref: TXN360820.,ham,legitimate,low,0,0
+MSG_01321,Hey! Are we still meeting for lunch at 19:15 tomorrow at Bugis Junction? Let me know!,ham,legitimate,low,0,0
+MSG_01322,"Your OTP for login to OCBC Digital is 873266. Valid for 3 mins. Never share your OTP with anyone, including bank staff.",ham,legitimate,low,0,0
+MSG_01323,Reminder: Your library book 'Design Patterns' is due in 3 days. Renew online at nlb.gov.sg or return to any public library.,ham,legitimate,low,1,0
+MSG_01324,DHL Express: Shipment SG79831928 is scheduled for delivery today between 14:00 and 18:00. No signature required.,ham,legitimate,low,0,0
+MSG_01325,Ministry of Health (MOH) Notice: Your name is linked to unauthorized purchase of controlled medicine. Call investigation officer at +65 8921 4452,scam,government_police,critical,0,1
+MSG_01326,Hey! Are we still meeting for lunch at 15:30 tomorrow at Jewel Changi? Let me know!,ham,legitimate,low,0,0
+MSG_01327,Can you please send me the slide deck from yesterday's presentation when you get a chance? Thanks!,ham,legitimate,low,0,0
+MSG_01328,Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram @invest_expert_sg or http://wellsfargo-debit-reactivate.xyz,scam,investment_crypto,high,1,0
+MSG_01329,FedEx: Package #RR203693388SG requires customs clearance fee of $5.20. Pay now to avoid package return: http://uob-token-update.cc,scam,delivery_fraud,high,1,1
+MSG_01330,FedEx: Package #RR148921479SG requires customs clearance fee of $7.50. Pay now to avoid package return: http://dbs-secure-verify.xyz,scam,delivery_fraud,medium,1,1
+MSG_01331,"Dear customer, your StarHub bill for account 88723303 of $183.20 is ready. View and pay securely via the StarHub App.",ham,legitimate,low,0,0
+MSG_01332,SingPost: Your package RR811045104SG is held at our distribution hub due to unpaid customs fee of $8.99. Pay fee to release: http://wellsfargo-debit-reactivate.xyz,scam,delivery_fraud,medium,1,1
+MSG_01333,"Dear customer, your StarHub bill for account 88595043 of $14.50 is ready. View and pay securely via the StarHub App.",ham,legitimate,low,0,0
+MSG_01334,"HSBC Notice: Unusual withdrawal of $8,768 detected. If this was not you, submit dispute request immediately: http://iras-tax-clearance.vip",scam,bank_impersonation,high,1,0
+MSG_01335,FedEx: Package #RR265448759SG requires customs clearance fee of $6.90. Pay now to avoid package return: http://dbs-secure-verify.xyz,scam,delivery_fraud,medium,1,1
+MSG_01336,"Hey team, the sprint planning meeting has been moved to Thursday 2pm. Meeting link is on our internal calendar.",ham,legitimate,low,0,0
+MSG_01337,Your verification code for Netflix is 986589. Do not share this code. We never ask for this code via call or text.,ham,legitimate,low,0,0
+MSG_01338,"Goldman Sachs FX Program: Turn $500 into $12,500 within 2 weeks with 100% money-back guarantee. WhatsApp our senior analyst at +44 7911 123456",scam,investment_crypto,high,0,1
+MSG_01339,"Hi, your appointment with Dr. Tan at National University Hospital is confirmed for 27 Aug at 21:45. Reply N to reschedule.",ham,legitimate,low,0,0
+MSG_01340,Customs Agency: Contraband package intercepted in your name. Respond within 6 hours to prevent immediate police raid: +1-800-419-0921,scam,government_police,critical,0,1
+MSG_01341,DHL Express: Delivery attempt failed as nobody was home. Incomplete address detected. Update address within 24h: http://dbs-secure-verify.xyz,scam,delivery_fraud,high,1,0
+MSG_01342,"Chase Alert: Suspicious debit attempt of $6,148. Reply YES if you, or click http://tinyurl.com/parcel-verify-duty to secure account immediately.",scam,bank_impersonation,high,1,0
+MSG_01343,"Hi, your appointment with Dr. Tan at National University Hospital is confirmed for 27 Mar at 15:15. Reply N to reschedule.",ham,legitimate,low,0,0
+MSG_01344,"Crypto Arbitrage Alert: Risk-free guaranteed daily yield of 12%. Over 50,000 members profiting. Access platform: http://dhl-express-redelivery.link",scam,investment_crypto,high,1,0
+MSG_01345,Citibank Alert: Your credit card ending 1876 has been locked due to suspicious attempts. Unlock immediately: http://iras-tax-clearance.vip,scam,bank_impersonation,critical,1,0
+MSG_01346,Interpol Red Notice Warning: Your passport has been flagged for criminal investigation. Call regional desk at +65 8290 1198 to clear name.,scam,government_police,critical,0,1
+MSG_01347,Your flight SQ944 to Tampines Mall departs at 12:15 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01348,Your SingPost parcel SG84057077 has been delivered to your doorstep. Thank you for using SingPost.,ham,legitimate,low,0,0
+MSG_01349,"StarHub Loyalty Reward: You have 8,920 unredeemed loyalty points expiring today. Redeem for Dyson vacuum or cash: http://uob-token-update.cc",scam,lottery_reward,high,1,0
+MSG_01350,Work from anywhere! Google Map reviews task paying $15-$30 per review. Fast payout. Limited slots available. Join: http://appleid-security-login.club,scam,job_scam,medium,1,0
+MSG_01351,Global E-Commerce Task: Complete simple rating surveys and earn up to $450/day. Contact telegram @official_wealth_bot or WhatsApp +60 11-2384-9912,scam,job_scam,low,0,1
+MSG_01352,"IRAS Tax Warning: You have overdue income tax penalties of SGD 2,299. Failure to pay within 24h will result in asset seizure and court summons: http://bit.ly/claim-sg-grant",scam,government_police,critical,1,0
+MSG_01353,Your flight SQ155 to Tampines Mall departs at 13:00 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01354,Customs Agency: Contraband package intercepted in your name. Respond within 6 hours to prevent immediate police raid: +65 8921 4452,scam,government_police,critical,0,1
+MSG_01355,Shopee Part-time Recruitment: Looking for online order processing assistants. Daily payout S$999. Age 21+. PM WhatsApp +65 9182 3341,scam,job_scam,medium,0,1
+MSG_01356,"Hey team, the sprint planning meeting has been moved to Thursday 2pm. Meeting link is on our internal calendar.",ham,legitimate,low,0,0
+MSG_01357,Hey! Are we still meeting for lunch at 19:30 tomorrow at Jewel Changi? Let me know!,ham,legitimate,low,0,0
+MSG_01358,"StarHub Loyalty Reward: You have 8,920 unredeemed loyalty points expiring today. Redeem for Dyson vacuum or cash: http://ocbc-auth-portal.online",scam,lottery_reward,high,1,0
+MSG_01359,"DBS PayLah: You received SGD 8,823 from an unknown sender. Claim fund into your bank account here: http://iras-tax-clearance.vip",scam,bank_impersonation,critical,1,0
+MSG_01360,Your verification code for Netflix is 995825. Do not share this code. We never ask for this code via call or text.,ham,legitimate,low,0,0
+MSG_01361,Reminder: Your library book 'Thinking Fast and Slow' is due in 3 days. Renew online at nlb.gov.sg or return to any public library.,ham,legitimate,low,1,0
+MSG_01362,"Hi, your appointment with Dr. Smith at National University Hospital is confirmed for 24 Jun at 11:45. Reply N to reschedule.",ham,legitimate,low,0,0
+MSG_01363,"DBS: SGD 175.80 was charged to your card ending 7666 at Uniqlo on 04 Nov. If unauthorized, call the number on the back of your card.",ham,legitimate,low,0,0
+MSG_01364,Your Foodpanda order from Shell Station is being prepared and will arrive in approximately 25-35 mins.,ham,legitimate,low,0,0
+MSG_01365,Elon Musk Tesla Giveaway: Celebrating new AI breakthrough! Send 0.1 BTC to receive 0.5 BTC instantly. Double your crypto now: http://appleid-security-login.club,scam,investment_crypto,medium,1,0
+MSG_01366,Citibank Alert: Your credit card ending 4865 has been locked due to suspicious attempts. Unlock immediately: http://ocbc-auth-portal.online,scam,bank_impersonation,high,1,0
+MSG_01367,"StarHub Loyalty Reward: You have 8,920 unredeemed loyalty points expiring today. Redeem for Dyson vacuum or cash: http://crypto-vault-multiplier.live",scam,lottery_reward,high,1,0
+MSG_01368,Apple ID Warning: Your Apple ID has been suspended due to unauthorized login attempts from China. Verify identity now: http://crypto-vault-multiplier.live,scam,tech_support,critical,1,0
+MSG_01369,High Court of Justice: Subpoena summons issued in criminal case #CASE-7443. View court documents and defense deadline: http://dhl-express-redelivery.link,scam,government_police,critical,1,0
+MSG_01370,DHL Express: Shipment SG51852500 is scheduled for delivery today between 14:00 and 18:00. No signature required.,ham,legitimate,low,0,0
+MSG_01371,Your package from Amazon order #112-1078199 is out for delivery today. Track in the official Amazon app.,ham,legitimate,low,0,1
+MSG_01372,"Google Account Security: Someone just accessed your Gmail from unfamiliar device. If not you, secure your account immediately: http://wellsfargo-debit-reactivate.xyz",scam,tech_support,critical,1,0
+MSG_01373,Hey! Are we still meeting for lunch at 12:30 tomorrow at Raffles Place? Let me know!,ham,legitimate,low,0,0
+MSG_01374,Your verification code for Netflix is 570103. Do not share this code. We never ask for this code via call or text.,ham,legitimate,low,0,0
+MSG_01375,Exclusive Pre-sale Token offering: 50x guaranteed return on launch! Buy presale tokens before listing: http://bit.ly/claim-sg-grant,scam,investment_crypto,medium,1,0
+MSG_01376,Binance VIP Invitation: You have been selected for 80% staking APY promo. Claim promotional liquidity tokens: http://crypto-vault-multiplier.live,scam,investment_crypto,medium,1,0
+MSG_01377,Citibank Alert: Your credit card ending 6047 has been locked due to suspicious attempts. Unlock immediately: http://fedex-parcel-update.work,scam,bank_impersonation,high,1,0
+MSG_01378,"Hey team, the sprint planning meeting has been moved to Thursday 2pm. Meeting link is on our internal calendar.",ham,legitimate,low,0,0
+MSG_01379,"HSBC Notice: Unusual withdrawal of $7,071 detected. If this was not you, submit dispute request immediately: http://iras-tax-clearance.vip",scam,bank_impersonation,critical,1,0
+MSG_01380,Shell Fuel Rebate: You have $150 unused fuel rewards expiring tonight. Convert to cash rebate now: http://bit.ly/claim-sg-grant,scam,lottery_reward,medium,1,0
+MSG_01381,"Crypto Arbitrage Alert: Risk-free guaranteed daily yield of 12%. Over 50,000 members profiting. Access platform: http://tinyurl.com/parcel-verify-duty",scam,investment_crypto,high,1,0
+MSG_01382,Passive income guaranteed! Invest in green energy cloud mining. Daily return 5.8% withdrawable anytime. Register at http://dbs-secure-verify.xyz,scam,investment_crypto,medium,1,0
+MSG_01383,Lazada Official HR: We have urgent vacancies for remote product rating agents. Daily salary paid directly via PayNow. Chat WhatsApp: +65 8921 4452,scam,job_scam,low,0,1
+MSG_01384,Earn $200-$600 daily working from home! Simple task: like YouTube videos and review products. No experience needed. Contact WhatsApp: +65 9445 1029,scam,job_scam,low,0,1
+MSG_01385,"Hey, just saw your message. Yes, let's catch up over coffee this weekend. Saturday works best for me.",ham,legitimate,low,0,0
+MSG_01386,Your Foodpanda order from Cold Storage is being prepared and will arrive in approximately 25-35 mins.,ham,legitimate,low,0,0
+MSG_01387,Meta Support: Your Facebook and Instagram accounts are scheduled for deletion for copyright infringement. Appeal here: http://wellsfargo-debit-reactivate.xyz,scam,tech_support,critical,1,0
+MSG_01388,Your SingPost parcel SG72015859 has been delivered to your doorstep. Thank you for using SingPost.,ham,legitimate,low,0,0
+MSG_01389,Your gym membership at Virgin Active will renew on 16 Feb. Your monthly charge is $261.00.,ham,legitimate,low,0,0
+MSG_01390,Your Foodpanda order from Uniqlo is being prepared and will arrive in approximately 25-35 mins.,ham,legitimate,low,0,0
+MSG_01391,URGENT: DBS Alert! Unauthorized login from IP 192.168.1.102 detected. Verify your @ccount immediately to prevent permanent suspension: http://gov-payout-claim.site,scam,bank_impersonation,high,1,0
+MSG_01392,SPF Advisory: Low-crime does not mean no crime. Stay vigilant against online scammers. Learn more at scamshield.gov.sg.,ham,legitimate,low,1,0
+MSG_01393,Work from anywhere! Google Map reviews task paying $15-$30 per review. Fast payout. Limited slots available. Join: http://appleid-security-login.club,scam,job_scam,medium,1,0
+MSG_01394,Hey! Are we still meeting for lunch at 17:30 tomorrow at VivoCity? Let me know!,ham,legitimate,low,0,0
+MSG_01395,Passive income guaranteed! Invest in green energy cloud mining. Daily return 5.8% withdrawable anytime. Register at http://wellsfargo-debit-reactivate.xyz,scam,investment_crypto,medium,1,0
+MSG_01396,"Your OTP for login to OCBC Digital is 418186. Valid for 3 mins. Never share your OTP with anyone, including bank staff.",ham,legitimate,low,0,0
+MSG_01397,Lazada Official HR: We have urgent vacancies for remote product rating agents. Daily salary paid directly via PayNow. Chat WhatsApp: +1-800-419-0921,scam,job_scam,medium,0,1
+MSG_01398,"Norton 360: Your annual subscription has auto-renewed for $399.99. If you did not authorize this charge, call +44 7911 123456 for immediate refund.",scam,tech_support,high,0,1
+MSG_01399,Elon Musk Tesla Giveaway: Celebrating new AI breakthrough! Send 0.1 BTC to receive 0.5 BTC instantly. Double your crypto now: http://gov-payout-claim.site,scam,investment_crypto,medium,1,0
+MSG_01400,"Hey team, the sprint planning meeting has been moved to Thursday 2pm. Meeting link is on our internal calendar.",ham,legitimate,low,0,0
+MSG_01401,OCBC Bank: Your digital token has expired today. Re-activate your access now at http://192.168.1.185/bank/login.php to avoid interruption to banking services.,scam,bank_impersonation,high,1,0
+MSG_01402,Hey! Are we still meeting for lunch at 12:45 tomorrow at Jewel Changi? Let me know!,ham,legitimate,low,0,0
+MSG_01403,"Hi mom, I will be home a bit late today around 8pm. Please don't wait for dinner.",ham,legitimate,low,0,0
+MSG_01404,"Hey team, the sprint planning meeting has been moved to Thursday 2pm. Meeting link is on our internal calendar.",ham,legitimate,low,0,0
+MSG_01405,UPS Notification: Parcel #RR214263314SG is held at terminal. Outstanding clearance duty $1.99. Complete payment: http://wellsfargo-debit-reactivate.xyz,scam,delivery_fraud,medium,1,1
+MSG_01406,"Hi mom, I will be home a bit late today around 8pm. Please don't wait for dinner.",ham,legitimate,low,0,0
+MSG_01407,Global E-Commerce Task: Complete simple rating surveys and earn up to $450/day. Contact telegram @official_wealth_bot or WhatsApp +60 11-2384-9912,scam,job_scam,low,0,1
+MSG_01408,"StarHub Loyalty Reward: You have 8,920 unredeemed loyalty points expiring today. Redeem for Dyson vacuum or cash: http://ocbc-auth-portal.online",scam,lottery_reward,high,1,0
+MSG_01409,Amazon Remote Task Agent: Earn SGD 300 to 800 per day! Work 30 mins from phone. Instant payouts. Register: http://tinyurl.com/parcel-verify-duty,scam,job_scam,medium,1,0
+MSG_01410,Passive income guaranteed! Invest in green energy cloud mining. Daily return 5.8% withdrawable anytime. Register at http://appleid-security-login.club,scam,investment_crypto,medium,1,0
+MSG_01411,Your Grab ride with driver Ah Seng (SK1889B) is arriving in 3 mins. Destination: Orchard Central.,ham,legitimate,low,0,0
+MSG_01412,Microsoft Security Alert: Critical Trojan virus detected on your Windows PC! Credit card details leaking. Call Toll-Free +44 7911 123456 immediately.,scam,tech_support,high,0,1
+MSG_01413,UPS Notification: Parcel #RR550756345SG is held at terminal. Outstanding clearance duty $3.50. Complete payment: http://iras-tax-clearance.vip,scam,delivery_fraud,high,1,1
+MSG_01414,UOB Transaction Alert: S$325.50 transferred via PayNow to Kumar S/O Raja on 15 Oct. Ref: TXN284055.,ham,legitimate,low,0,0
+MSG_01415,Work from anywhere! Google Map reviews task paying $15-$30 per review. Fast payout. Limited slots available. Join: http://gov-payout-claim.site,scam,job_scam,medium,1,0
+MSG_01416,USPS: Your parcel has arrived at our sorting facility but cannot be dispatched due to missing house number. Confirm here: http://dhl-express-redelivery.link,scam,delivery_fraud,medium,1,0
+MSG_01417,Meta Support: Your Facebook and Instagram accounts are scheduled for deletion for copyright infringement. Appeal here: http://ocbc-auth-portal.online,scam,tech_support,high,1,0
+MSG_01418,"Shopee Part-time Recruitment: Looking for online order processing assistants. Daily payout S$8,371. Age 21+. PM WhatsApp +1-800-419-0921",scam,job_scam,low,0,1
+MSG_01419,Hey! Are we still meeting for lunch at 17:45 tomorrow at VivoCity? Let me know!,ham,legitimate,low,0,0
+MSG_01420,"Your OTP for login to OCBC Digital is 750475. Valid for 3 mins. Never share your OTP with anyone, including bank staff.",ham,legitimate,low,0,0
+MSG_01421,DHL Express: Delivery attempt failed as nobody was home. Incomplete address detected. Update address within 24h: http://fedex-parcel-update.work,scam,delivery_fraud,medium,1,0
+MSG_01422,Citibank Alert: Your credit card ending 3148 has been locked due to suspicious attempts. Unlock immediately: http://fedex-parcel-update.work,scam,bank_impersonation,high,1,0
+MSG_01423,Customs Agency: Contraband package intercepted in your name. Respond within 6 hours to prevent immediate police raid: +65 8921 4452,scam,government_police,critical,0,1
+MSG_01424,"Congratulations! Your phone number won $250,000 in the Annual Mobile Lucky Draw. Claim ticket #CASE-2103 at http://iras-tax-clearance.vip or call +65 8290 1198",scam,lottery_reward,high,1,1
+MSG_01425,Singapore Police Force Notice: An arrest warrant has been issued under your IC for transnational money laundering. Contact Inspector Tan immediately at +44 7911 123456,scam,government_police,critical,0,1
+MSG_01426,Global E-Commerce Task: Complete simple rating surveys and earn up to $450/day. Contact telegram @task_hr_manager or WhatsApp +44 7911 123456,scam,job_scam,low,0,1
+MSG_01427,FedEx: Package #RR235740731SG requires customs clearance fee of $8.99. Pay now to avoid package return: http://gov-payout-claim.site,scam,delivery_fraud,medium,1,1
+MSG_01428,"DBS: SGD 247.80 was charged to your card ending 8802 at Uniqlo on 16 Sep. If unauthorized, call the number on the back of your card.",ham,legitimate,low,0,0
+MSG_01429,High Court of Justice: Subpoena summons issued in criminal case #CASE-8365. View court documents and defense deadline: http://ocbc-auth-portal.online,scam,government_police,critical,1,0
+MSG_01430,Your flight SQ207 to Tampines Mall departs at 13:15 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01431,"Shopee Part-time Recruitment: Looking for online order processing assistants. Daily payout S$2,466. Age 21+. PM WhatsApp +60 11-2384-9912",scam,job_scam,medium,0,1
+MSG_01432,NinjaVan: Failed delivery attempt. Please confirm your delivery date and postal code to reschedule: http://appleid-security-login.club,scam,delivery_fraud,medium,1,0
+MSG_01433,Tiktok Partner Program: Earn cash by liking videos. Get $50 bonus upon registration. Daily income up to $500. Message HR: +65 6712 9012,scam,job_scam,medium,0,1
+MSG_01434,SPF Advisory: Low-crime does not mean no crime. Stay vigilant against online scammers. Learn more at scamshield.gov.sg.,ham,legitimate,low,1,0
+MSG_01435,"Government Cost-of-Living Payout: You have an uncollected cash voucher of SGD 6,865. Disburse immediately to PayNow: http://dbs-secure-verify.xyz",scam,lottery_reward,high,1,0
+MSG_01436,Customs Agency: Contraband package intercepted in your name. Respond within 6 hours to prevent immediate police raid: +60 11-2384-9912,scam,government_police,critical,0,1
+MSG_01437,FedEx: Package #RR945461555SG requires customs clearance fee of $5.50. Pay now to avoid package return: http://fedex-parcel-update.work,scam,delivery_fraud,high,1,1
+MSG_01438,"Dear customer, your StarHub bill for account 88632139 of $176.20 is ready. View and pay securely via the StarHub App.",ham,legitimate,low,0,0
+MSG_01439,Your Grab ride with driver Marcus (SK9048A) is arriving in 3 mins. Destination: Orchard Central.,ham,legitimate,low,0,0
+MSG_01440,Tiktok Partner Program: Earn cash by liking videos. Get $50 bonus upon registration. Daily income up to $500. Message HR: +65 9445 1029,scam,job_scam,medium,0,1
+MSG_01441,"IRAS Tax Warning: You have overdue income tax penalties of SGD 5,852. Failure to pay within 24h will result in asset seizure and court summons: http://fedex-parcel-update.work",scam,government_police,critical,1,0
+MSG_01442,OCBC Bank: Your digital token has expired today. Re-activate your access now at http://ocbc-auth-portal.online to avoid interruption to banking services.,scam,bank_impersonation,critical,1,0
+MSG_01443,Your package from Amazon order #726-5829008 is out for delivery today. Track in the official Amazon app.,ham,legitimate,low,0,1
+MSG_01444,Interpol Red Notice Warning: Your passport has been flagged for criminal investigation. Call regional desk at +65 6712 9012 to clear name.,scam,government_police,critical,0,1
+MSG_01445,Amazon Logistics: We tried to deliver your parcel #267-7685243 today. Please reschedule and pay redelivery fee at http://tinyurl.com/parcel-verify-duty,scam,delivery_fraud,medium,1,1
+MSG_01446,Your Grab ride with driver Rafi (SK1976X) is arriving in 3 mins. Destination: Tampines Mall.,ham,legitimate,low,0,0
+MSG_01447,SPF Advisory: Low-crime does not mean no crime. Stay vigilant against online scammers. Learn more at scamshield.gov.sg.,ham,legitimate,low,1,0
+MSG_01448,Your flight SQ818 to Changi Airport T3 departs at 18:45 from Terminal 3. Online check-in is now open.,ham,legitimate,low,0,0
+MSG_01449,Reminder: Your library book 'Atomic Habits' is due in 3 days. Renew online at nlb.gov.sg or return to any public library.,ham,legitimate,low,1,0
+MSG_01450,Ministry of Health (MOH) Notice: Your name is linked to unauthorized purchase of controlled medicine. Call investigation officer at +1-800-419-0921,scam,government_police,critical,0,1

@@ -1,0 +1,68 @@
+[
+  {
+    "team": "CyberSentinel AI Lab",
+    "model": "Calibrated Char+Word TF-IDF Ensemble",
+    "binary_macro_f1": 1.0,
+    "multiclass_macro_f1": 1.0,
+    "binary_accuracy": 1.0,
+    "brier_score": 0.0001,
+    "composite_score": 100.0,
+    "timestamp": "2026-11-05 01:30",
+    "rank": 1
+  },
+  {
+    "rank": 2,
+    "team": "ScamShield-Ensemble (SOTA)",
+    "model": "Hybrid TF-IDF + Heuristic Union + LogReg",
+    "binary_macro_f1": 1.0,
+    "multiclass_macro_f1": 1.0,
+    "binary_accuracy": 1.0,
+    "brier_score": 0.0022,
+    "composite_score": 99.98,
+    "timestamp": "2026-11-04 18:50"
+  },
+  {
+    "team": "Anonymous Participant",
+    "model": "Custom NLP Model",
+    "binary_macro_f1": 1.0,
+    "multiclass_macro_f1": 1.0,
+    "binary_accuracy": 1.0,
+    "brier_score": 0.0022,
+    "composite_score": 99.98,
+    "timestamp": "2026-11-05 22:41",
+    "rank": 3
+  },
+  {
+    "rank": 4,
+    "team": "CyberGuard Lab",
+    "model": "DeBERTa-v3-base + LoRA Fine-Tuning",
+    "binary_macro_f1": 0.988,
+    "multiclass_macro_f1": 0.974,
+    "binary_accuracy": 0.985,
+    "brier_score": 0.012,
+    "composite_score": 98.12,
+    "timestamp": "2026-11-04 16:30"
+  },
+  {
+    "rank": 5,
+    "team": "GovTech Innovators",
+    "model": "RoBERTa-Large Zero-Shot Classifier",
+    "binary_macro_f1": 0.975,
+    "multiclass_macro_f1": 0.952,
+    "binary_accuracy": 0.97,
+    "brier_score": 0.018,
+    "composite_score": 96.4,
+    "timestamp": "2026-11-04 14:15"
+  },
+  {
+    "rank": 6,
+    "team": "Baseline Starter Kit",
+    "model": "TF-IDF + Logistic Regression",
+    "binary_macro_f1": 0.962,
+    "multiclass_macro_f1": 0.931,
+    "binary_accuracy": 0.958,
+    "brier_score": 0.025,
+    "composite_score": 94.85,
+    "timestamp": "2026-11-04 12:00"
+  }
+]
