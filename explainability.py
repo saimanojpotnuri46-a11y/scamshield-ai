@@ -4,13 +4,21 @@ Provides transparent, interpretable threat assessments, identifying psychologica
 manipulation tactics, flagged tokens, risk scores, and actionable defense guidance.
 """
 
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 from src.preprocessor import (
     extract_urls,
     analyze_url,
     extract_phone_numbers,
     detect_pattern_triggers,
     compute_linguistic_features
+)
+from src.localization import (
+    get_current_language,
+    get_category_label,
+    get_localized_tactics,
+    get_localized_safety_advice,
+    detect_language,
+    load_user_preferences
 )
 
 class ScamExplainer:
@@ -22,11 +30,20 @@ class ScamExplainer:
         text: str,
         is_scam: bool,
         scam_prob: float,
-        category: str
+        category: str,
+        lang: Optional[str] = None
     ) -> Dict[str, Any]:
         """
-        Builds a comprehensive explanation breakdown for an analyzed message.
+        Builds a comprehensive explanation breakdown for an analyzed message,
+        with multi-language customization support.
         """
+        prefs = load_user_preferences()
+        if lang:
+            active_lang = lang
+        elif prefs.get("auto_detect_language", True):
+            active_lang = detect_language(text)
+        else:
+            active_lang = get_current_language()
         urls = extract_urls(text)
         phones = extract_phone_numbers(text)
         patterns = detect_pattern_triggers(text)
@@ -111,37 +128,30 @@ class ScamExplainer:
         for ua in url_analyses:
             flagged_tokens.add(ua["url"])
 
-        # Prescriptive Safety Advice
-        advice = []
-        if is_scam or risk_score >= 50:
-            advice.append("⚠️ DO NOT click on any links in this message or open attachments.")
-            advice.append("🚫 NEVER provide your OTP, banking login, Singpass, or card PIN to unverified links.")
-            if "bank" in category or "bank_impersonation" in category:
-                advice.append("🏦 Verify your account status by logging directly into the official bank mobile application.")
-            elif "delivery" in category:
-                advice.append("📦 Check delivery status inside the official courier app or website using your original tracking number.")
-            elif "government" in category or "police" in category:
-                advice.append("🛡️ Government and police agencies will NEVER demand payments or transfer of funds over phone or SMS.")
-            elif "job" in category:
-                advice.append("💼 Legitimate companies will never hire via Telegram/WhatsApp to perform paid video likes or review tasks.")
-            advice.append("📢 Report this message via the official ScamShield app or scamshield.gov.sg.")
+        # Prescriptive Safety Advice (Localized)
+        advice = get_localized_safety_advice(category, is_scam, risk_score, lang=active_lang)
+        localized_tactics = get_localized_tactics(tactics, lang=active_lang)
+        category_label = get_category_label(category, lang=active_lang)
+
+        # Localized Summary
+        if is_scam:
+            summary = f"Flagged as {category_label} ({category.replace('_', ' ').title()}) with {risk_score}% risk. {len(tactics)} attack tactics identified."
         else:
-            advice.append("✅ This message appears legitimate, but always exercise standard vigilance with incoming messages.")
+            summary = "Message analyzed as safe legitimate communication." if active_lang == "en" else f"消息研判为合法安全通讯 ({category_label})。"
 
         return {
             "risk_score": risk_score,
             "risk_level": risk_level,
             "risk_badge": risk_badge,
             "category": category,
+            "category_label": category_label,
+            "language": active_lang,
             "scam_probability": round(scam_prob, 4),
-            "tactics_detected": tactics,
+            "tactics_detected": localized_tactics,
+            "raw_tactics": tactics,
             "flagged_tokens": sorted(list(flagged_tokens)),
             "extracted_urls": url_analyses,
             "extracted_phones": phones,
             "safety_advice": advice,
-            "summary": (
-                f"Flagged as {category.replace('_', ' ').title()} with {risk_score}% risk. "
-                f"{len(tactics)} attack tactics identified."
-                if is_scam else "Message analyzed as safe legitimate communication."
-            )
+            "summary": summary
         }

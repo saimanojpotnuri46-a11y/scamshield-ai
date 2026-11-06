@@ -22,6 +22,7 @@ if sys.platform == "win32":
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.pipeline import ScamShieldPipeline
+from src.localization import generate_auto_reply_warning, get_category_label, load_user_preferences
 
 class WhatsAppMessage:
     def __init__(
@@ -56,17 +57,19 @@ class WhatsAppGuardian:
         self.pipeline = pipeline or ScamShieldPipeline()
         self.alert_history: List[Dict[str, Any]] = []
 
-    def inspect_message(self, message: WhatsAppMessage) -> Dict[str, Any]:
+    def inspect_message(self, message: WhatsAppMessage, lang: Optional[str] = None) -> Dict[str, Any]:
         """
         Processes an incoming WhatsApp message/notification, calculates threat level,
-        and generates automated alert notification and auto-reply warning.
+        and generates automated alert notification and auto-reply warning in user's preferred language.
         """
-        scan_result = self.pipeline.scan_message(message.message_text)
+        scan_result = self.pipeline.scan_message(message.message_text, lang=lang)
 
         is_scam = scan_result["is_scam"]
         risk_score = scan_result["risk_score"]
         category = scan_result["category"]
+        category_label = scan_result.get("category_label", category)
         risk_level = scan_result["risk_level"]
+        active_lang = lang or scan_result.get("language")
 
         # Determine notification severity
         if risk_score >= 80:
@@ -86,14 +89,10 @@ class WhatsAppGuardian:
             notification_icon = "✅"
             action = "DELIVER_NORMALLY"
 
-        # Generate automated WhatsApp response warning
+        # Generate automated WhatsApp response warning in preferred language
         auto_reply = ""
         if is_scam or risk_score >= 50:
-            auto_reply = (
-                f"🛡️ [SCAMSHIELD NOTIFICATION INTERCEPT]\n"
-                f"WARNING: This message was detected as a potential {category.replace('_', ' ').upper()} (Risk: {risk_score}%).\n"
-                f"DO NOT click external links, provide 2FA OTPs, or transfer money."
-            )
+            auto_reply = generate_auto_reply_warning(category, risk_score, lang=active_lang)
 
         alert_payload = {
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),

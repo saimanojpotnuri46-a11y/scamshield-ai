@@ -55,8 +55,8 @@ class ScamShieldPipeline:
         self.is_ready = True
         return metrics
 
-    def scan_message(self, text: str) -> Dict[str, Any]:
-        """Scans a single message and returns an end-to-end security verdict."""
+    def scan_message(self, text: str, lang: Optional[str] = None) -> Dict[str, Any]:
+        """Scans a single message and returns an end-to-end security verdict with language preferences."""
         if not self.is_ready:
             raise RuntimeError("ScamShield pipeline is not initialized or trained.")
 
@@ -69,6 +69,7 @@ class ScamShieldPipeline:
                 "risk_score": 0.0,
                 "risk_level": "SAFE",
                 "category": "legitimate",
+                "category_label": "Legitimate",
                 "scam_probability": 0.0,
                 "summary": "Empty input provided."
             }
@@ -84,12 +85,13 @@ class ScamShieldPipeline:
         if not is_scam and category != "legitimate" and prob < 0.40:
             category = "legitimate"
 
-        # Generate Explainability & Guidance
+        # Generate Explainability & Guidance with localized preferences
         explanation = self.explainer.explain(
             text=cleaned_text,
             is_scam=is_scam,
             scam_prob=prob,
-            category=category
+            category=category,
+            lang=lang
         )
 
         return {
@@ -97,6 +99,8 @@ class ScamShieldPipeline:
             "is_scam": is_scam,
             "label": "scam" if is_scam else "ham",
             "category": category,
+            "category_label": explanation.get("category_label", category.replace("_", " ").title()),
+            "language": explanation.get("language", "en"),
             "scam_probability": prob,
             "risk_score": explanation["risk_score"],
             "risk_level": explanation["risk_level"],

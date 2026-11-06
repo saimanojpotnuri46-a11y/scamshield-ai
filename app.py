@@ -1,7 +1,8 @@
 """
 ScamShield NLP Multi-Channel Defense Dashboard
 Interactive Operations Center for SMS, WhatsApp Notification Guardian,
-Email Phishing Scanner, Clipboard Shield, and NLP Challenge Evaluation.
+Telegram Guardian, Email Phishing Scanner, Clipboard Shield, QR Quishing Audit,
+Language Preferences, and NLP Challenge Evaluation.
 """
 
 import os
@@ -28,6 +29,19 @@ from src.email_scanner import EmailPhishingScanner
 from src.clipboard_guard import ClipboardGuard
 from src.telegram_guardian import TelegramGuardian, TelegramMessage
 from src.qr_scanner import QuishingScanner
+from src.localization import (
+    SUPPORTED_LANGUAGES,
+    DEFAULT_LANGUAGE,
+    t,
+    get_current_language,
+    set_current_language,
+    load_user_preferences,
+    save_user_preferences,
+    get_localized_presets,
+    get_category_label,
+    generate_auto_reply_warning,
+    detect_language
+)
 from challenge.evaluate_submission import evaluate
 from challenge.leaderboard import get_leaderboard_dataframe, register_submission
 
@@ -44,107 +58,151 @@ def get_engines():
 
 pipeline, whatsapp_guardian, email_scanner, clipboard_guard, telegram_guardian, quishing_scanner = get_engines()
 
-# Preset Test Scenarios
-SAMPLE_PRESETS = {
-    "🏦 OCBC Bank Token Phishing": "OCBC Bank: Your digital token has expired today. Re-activate your access now at http://ocbc-auth-portal.online to avoid permanent account freeze.",
-    "📦 SingPost Customs Fee Scam": "SingPost: Your package SG920192 is held at our distribution hub due to unpaid customs fee of $2.50. Pay fee to release: http://singpost-tracking-fees.top",
-    "💼 WhatsApp Part-Time Job Scam": "Earn $200-$600 daily working from home! Simple task: like YouTube videos and review products. No experience needed. Contact WhatsApp: +65 8921 4452",
-    "📈 Crypto Guaranteed 500% ROI": "Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram @sg_crypto_admin or http://crypto-vault-multiplier.live",
-    "⚖️ Police Arrest Warrant Threat": "Singapore Police Force Notice: An arrest warrant has been issued under your IC for transnational money laundering. Contact Inspector Tan immediately at +65 6712 9012",
-    "💻 Microsoft Tech Support Alert": "Microsoft Security Alert: Critical Trojan virus detected on your Windows PC! Credit card details leaking. Call Toll-Free +1-800-419-0921 immediately.",
-    "🟢 Genuine Bank OTP (Ham)": "Your OTP for login to OCBC Digital is 829104. Valid for 3 mins. Never share your OTP with anyone, including bank staff.",
-    "🟢 Genuine Courier Delivery (Ham)": "Your package from Amazon order #112-9281928 is out for delivery today. Track in the official Amazon app.",
-    "🟢 Genuine Personal SMS (Ham)": "Hey! Are we still meeting for lunch at 12:30pm tomorrow at Bugis Junction? Let me know!"
-}
+# Load User Preferences
+user_prefs = load_user_preferences()
 
-# Sidebar
+if "preferred_lang" not in st.session_state:
+    st.session_state["preferred_lang"] = user_prefs.get("preferred_language", DEFAULT_LANGUAGE)
+
+curr_lang = st.session_state["preferred_lang"]
+if curr_lang not in SUPPORTED_LANGUAGES:
+    curr_lang = DEFAULT_LANGUAGE
+
+# ==========================================
+# SIDEBAR
+# ==========================================
 st.sidebar.image("https://img.icons8.com/fluency/96/shield.png", width=70)
-st.sidebar.title("🛡️ ScamShield AI")
-st.sidebar.markdown(
-    """
-    **Autonomous Multi-Channel Defense**  
-    Protects citizens across SMS, WhatsApp Notifications, Email Phishing, and Browser Clipboard.
-    """
-)
-st.sidebar.markdown("---")
-st.sidebar.markdown(f"**Core Engine**: {'🟢 Ready' if pipeline.is_ready else '🔴 Off'}")
-st.sidebar.markdown("**Channels Protected**:")
-st.sidebar.markdown("- 💬 SMS / Smishing")
-st.sidebar.markdown("- 📱 WhatsApp Notifications")
-st.sidebar.markdown("- ✈️ Telegram Channel & Bot Guard")
-st.sidebar.markdown("- 📧 Email Phishing & BEC")
-st.sidebar.markdown("- 📋 Clipboard / Link Guard")
-st.sidebar.markdown("- 📷 Quishing (QR Code Phishing)")
-st.sidebar.markdown("---")
-st.sidebar.caption("Inspired by Singapore ScamShield initiative. Built for cybersecurity engineers.")
+st.sidebar.title(t("sidebar_title", curr_lang))
+st.sidebar.markdown(t("sidebar_desc", curr_lang))
 
-# Main Header
-st.title("🛡️ ScamShield Multi-Channel Fraud Defense System")
-st.markdown(
-    "Detect, analyze, and intercept deceptive cyber-fraud in real time across mobile and desktop workflows."
-)
+st.sidebar.markdown("---")
+st.sidebar.subheader(t("lang_selector", curr_lang))
 
-tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
-    "🔍 SMS Message Scanner",
-    "📱 WhatsApp Guardian",
-    "✈️ Telegram Guardian",
-    "📧 Email Phishing Scanner",
-    "📋 Clipboard & Browser Shield",
-    "📷 Quishing (QR Phishing) Audit",
-    "🏆 NLP Challenge & Leaderboard",
-    "🔌 Multi-Channel REST API"
+# Language selection dropdown in sidebar
+lang_codes = list(SUPPORTED_LANGUAGES.keys())
+lang_labels = [
+    f"{SUPPORTED_LANGUAGES[code]['flag']} {SUPPORTED_LANGUAGES[code]['native_name']} ({SUPPORTED_LANGUAGES[code]['name']})"
+    for code in lang_codes
+]
+current_lang_idx = lang_codes.index(curr_lang) if curr_lang in lang_codes else 0
+
+selected_lang_label = st.sidebar.selectbox(
+    "Select Language / 选择语言:",
+    options=lang_labels,
+    index=current_lang_idx,
+    key="sb_language_selector"
+)
+selected_lang_code = lang_codes[lang_labels.index(selected_lang_label)]
+
+if selected_lang_code != curr_lang:
+    st.session_state["preferred_lang"] = selected_lang_code
+    set_current_language(selected_lang_code)
+    st.rerun()
+
+st.sidebar.markdown("---")
+st.sidebar.markdown(f"**{t('core_engine', curr_lang)}**: {'🟢 Ready' if pipeline.is_ready else '🔴 Off'}")
+st.sidebar.markdown(f"**{t('channels_protected', curr_lang)}**")
+st.sidebar.markdown(f"- {t('channel_sms', curr_lang)}")
+st.sidebar.markdown(f"- {t('channel_wa', curr_lang)}")
+st.sidebar.markdown(f"- {t('channel_tg', curr_lang)}")
+st.sidebar.markdown(f"- {t('channel_email', curr_lang)}")
+st.sidebar.markdown(f"- {t('channel_clip', curr_lang)}")
+st.sidebar.markdown(f"- {t('channel_qr', curr_lang)}")
+st.sidebar.markdown("---")
+st.sidebar.caption(t("sidebar_caption", curr_lang))
+
+# ==========================================
+# MAIN HEADER & NAVIGATION TABS
+# ==========================================
+st.title(t("app_title", curr_lang))
+st.markdown(t("app_subtitle", curr_lang))
+
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
+    t("tab_sms", curr_lang),
+    t("tab_wa", curr_lang),
+    t("tab_tg", curr_lang),
+    t("tab_email", curr_lang),
+    t("tab_clip", curr_lang),
+    t("tab_qr", curr_lang),
+    t("tab_prefs", curr_lang),
+    t("tab_challenge", curr_lang),
+    t("tab_api", curr_lang)
 ])
 
 # ==========================================
 # TAB 1: SMS MESSAGE SCANNER
 # ==========================================
 with tab1:
-    st.subheader("🔍 Interactive SMS / Message Scanner")
+    st.subheader(t("tab_sms", curr_lang))
     st.markdown("Select a preset scenario or type any incoming suspicious message:")
 
-    preset_choice = st.selectbox("Load Test Scenario:", ["-- Custom Input --"] + list(SAMPLE_PRESETS.keys()))
-    default_text = SAMPLE_PRESETS[preset_choice] if preset_choice != "-- Custom Input --" else ""
+    # Load localized presets for the active language
+    localized_presets = get_localized_presets(curr_lang)
+    preset_keys = [t("custom_input", curr_lang)] + list(localized_presets.keys())
+    
+    preset_choice = st.selectbox(
+        t("load_scenario", curr_lang),
+        options=preset_keys,
+        key="sms_preset_selector"
+    )
+    
+    default_text = ""
+    if preset_choice != t("custom_input", curr_lang) and preset_choice in localized_presets:
+        default_text = localized_presets[preset_choice]
 
     user_input = st.text_area(
-        "Message Text to Inspect:",
+        t("message_to_inspect", curr_lang),
         value=default_text,
-        height=100,
-        placeholder="e.g. URGENT: Your bank account will be frozen. Click link to verify..."
+        height=110,
+        placeholder="e.g. URGENT: Your bank account will be frozen. Click link to verify...",
+        key="sms_input_area"
     )
 
-    if st.button("🚀 Run Deep Scan", type="primary", key="btn_scan_sms"):
+    if st.button(t("run_deep_scan", curr_lang), type="primary", key="btn_scan_sms"):
         if not user_input.strip():
-            st.warning("Please enter a message.")
+            st.warning("Please enter a message to scan.")
         else:
-            with st.spinner("Analyzing message vectors and domain risk..."):
-                res = pipeline.scan_message(user_input)
+            with st.spinner(t("analyzing", curr_lang)):
+                res = pipeline.scan_message(user_input, lang=curr_lang)
 
             st.markdown("---")
             c1, c2, c3 = st.columns(3)
-            c1.metric("Risk Score", f"{res['risk_score']}%", res["risk_level"], delta_color="inverse" if res["is_scam"] else "normal")
-            c2.metric("Classification", res["label"].upper(), res["category"].replace("_", " ").title())
-            c3.metric("Scam Probability", f"{res['scam_probability'] * 100:.1f}%")
+            c1.metric(
+                t("risk_score", curr_lang),
+                f"{res['risk_score']}%",
+                res["risk_level"],
+                delta_color="inverse" if res["is_scam"] else "normal"
+            )
+            c2.metric(
+                t("classification", curr_lang),
+                res["label"].upper(),
+                res.get("category_label", res["category"].replace("_", " ").title())
+            )
+            c3.metric(
+                t("scam_probability", curr_lang),
+                f"{res['scam_probability'] * 100:.1f}%"
+            )
 
             st.progress(min(1.0, res["risk_score"] / 100.0))
 
             cd1, cd2 = st.columns(2)
             with cd1:
-                st.markdown("#### 🚨 Social Engineering Tactics")
+                st.markdown(f"#### {t('tactics_detected_header', curr_lang)}")
                 if res["tactics_detected"]:
                     for tac in res["tactics_detected"]:
                         st.warning(f"**{tac['tactic']}**\n\n{tac['description']}")
                 else:
-                    st.success("No predatory social engineering detected.")
+                    st.success(t("no_tactics", curr_lang))
 
             with cd2:
-                st.markdown("#### 🌐 Extracted URLs & Infrastructure Audit")
+                st.markdown(f"#### {t('extracted_urls_header', curr_lang)}")
                 if res["extracted_urls"]:
                     for u in res["extracted_urls"]:
                         st.info(f"**URL:** `{u['url']}`\n- Risk Score: **{u['url_risk_score']}/100**")
                 else:
-                    st.write("No external links found.")
+                    st.write(t("no_urls", curr_lang))
 
-            st.subheader("🛡️ Prescriptive Safety Checklist")
+            st.subheader(t("safety_checklist_header", curr_lang))
             for item in res["safety_advice"]:
                 st.markdown(f"- {item}")
 
@@ -152,30 +210,29 @@ with tab1:
 # TAB 2: WHATSAPP NOTIFICATION GUARDIAN
 # ==========================================
 with tab2:
-    st.subheader("📱 WhatsApp Spam & Notification Guardian")
-    st.markdown(
-        """
-        Intercepts incoming WhatsApp notifications in real time, checks the sender against predatory
-        patterns, flags group recruitment spam, and generates **instant user alert banners** and **automated warning replies**.
-        """
-    )
+    st.subheader(t("wa_title", curr_lang))
+    st.markdown(t("wa_desc", curr_lang))
 
     col_wa_in, col_wa_phone = st.columns([3, 2])
 
     with col_wa_in:
-        wa_sender_name = st.text_input("Sender Display Name:", value="Dave (Recruitment HR)")
-        wa_sender_num = st.text_input("Sender Phone Number:", value="+65 8921 4452")
-        wa_is_group = st.checkbox("Is Group Message?", value=True)
-        wa_group_name = st.text_input("Group Name (if applicable):", value="Singapore Part-Time Job Seekers") if wa_is_group else None
-        wa_body = st.text_area(
-            "Incoming WhatsApp Message Body:",
-            value="Hi all! Earn $300-$800 daily working from home! Simple task: like YouTube videos and review products. Daily payout via PayNow. Register: http://job-daily-income.xyz",
-            height=110
+        wa_sender_name = st.text_input(t("wa_sender_name", curr_lang), value="Dave (Recruitment HR)")
+        wa_sender_num = st.text_input(t("wa_sender_num", curr_lang), value="+65 8921 4452")
+        wa_is_group = st.checkbox(t("wa_is_group", curr_lang), value=True)
+        wa_group_name = st.text_input(t("wa_group_name", curr_lang), value="Singapore Part-Time Job Seekers") if wa_is_group else None
+        
+        wa_default_msg = (
+            "Hi all! Earn $300-$800 daily working from home! Simple task: like YouTube videos and review products. Daily payout via PayNow. Register: http://job-daily-income.xyz"
+            if curr_lang == "en" else
+            "居家兼职诚招人员！每天轻松点赞YouTube视频和评测商品，日赚$200-$600新币，当日PayNow结算。立即添加WhatsApp: +65 8921 4452"
+            if curr_lang == "zh" else
+            "Jana $200-$600 sehari bekerja dari rumah! Tugas mudah: tonton dan like video YouTube. Bayaran harian via PayNow: http://job-daily-income.xyz"
         )
+        wa_body = st.text_area(t("wa_body", curr_lang), value=wa_default_msg, height=110)
 
     with col_wa_phone:
-        st.markdown("#### 📲 Simulated Mobile Notification")
-        if st.button("⚡ Simulate Incoming WhatsApp Message", type="primary"):
+        st.markdown(f"#### {t('wa_sim_header', curr_lang)}")
+        if st.button(t("wa_sim_btn", curr_lang), type="primary", key="btn_sim_wa"):
             msg_obj = WhatsAppMessage(
                 sender_name=wa_sender_name,
                 sender_number=wa_sender_num,
@@ -183,57 +240,55 @@ with tab2:
                 is_group=wa_is_group,
                 group_name=wa_group_name
             )
-            alert = whatsapp_guardian.inspect_message(msg_obj)
+            alert = whatsapp_guardian.inspect_message(msg_obj, lang=curr_lang)
 
-            # Simulated WhatsApp Notification Card
             if alert["risk_score"] >= 50:
                 st.error(
                     f"""
-                    **{alert['notification_icon']} WHATSAPP INTERCEPT ALERT**  
+                    **{alert['notification_icon']} {t('wa_intercept_alert', curr_lang)}**  
                     **From:** {alert['sender']}  
                     **Group:** {alert.get('group_name') or 'Direct Message'}  
-                    **Risk Score:** {alert['risk_score']}% ({alert['risk_level']})  
-                    **Category:** {alert['category'].replace('_', ' ').title()}  
-                    **Action Taken:** `{alert['action_taken']}`
+                    **{t('risk_score', curr_lang)}:** {alert['risk_score']}% ({alert['risk_level']})  
+                    **{t('typology', curr_lang)}:** {get_category_label(alert['category'], curr_lang)}  
+                    **{t('action_taken', curr_lang)}:** `{alert['action_taken']}`
                     """
                 )
             else:
                 st.success(
                     f"""
-                    **{alert['notification_icon']} WHATSAPP NOTIFICATION (SAFE)**  
+                    **{alert['notification_icon']} {t('wa_safe_notice', curr_lang)}**  
                     **From:** {alert['sender']}  
                     **Status:** Delivered normally.
                     """
                 )
 
             if alert["auto_reply_warning"]:
-                st.markdown("#### 🤖 Automated Safety Warning Response:")
+                st.markdown(f"#### {t('wa_auto_reply_header', curr_lang)}")
                 st.code(alert["auto_reply_warning"], language="text")
 
 # ==========================================
 # TAB 3: TELEGRAM GUARDIAN
 # ==========================================
 with tab3:
-    st.subheader("✈️ Telegram Spam, Bot & Crypto Pump Guardian")
-    st.markdown(
-        "Monitors Telegram channel broadcasts, VIP group chats, and bot interactions for crypto manipulation and fake giveaways."
-    )
+    st.subheader(t("tg_title", curr_lang))
+    st.markdown(t("tg_desc", curr_lang))
 
     tg_col1, tg_col2 = st.columns(2)
     with tg_col1:
-        tg_user = st.text_input("Telegram Username / Bot Handle:", value="@Binance_VIP_QuantBot")
-        tg_is_bot = st.checkbox("Sender is Telegram Bot", value=True)
+        tg_user = st.text_input(t("tg_user", curr_lang), value="@Binance_VIP_QuantBot")
+        tg_is_bot = st.checkbox(t("tg_is_bot", curr_lang), value=True)
     with tg_col2:
-        tg_chat = st.text_input("Channel / Group Title:", value="SG VIP Crypto Signals & Arbitrage")
-        tg_is_channel = st.checkbox("Is Public Channel Broadcast", value=False)
+        tg_chat = st.text_input(t("tg_chat", curr_lang), value="SG VIP Crypto Signals & Arbitrage")
+        tg_is_channel = st.checkbox(t("tg_is_channel", curr_lang), value=False)
 
-    tg_text = st.text_area(
-        "Telegram Message Body:",
-        value="Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram bot @binance_yield_bot or http://binance-vault-promo.live",
-        height=100
+    tg_default_body = (
+        "Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram bot @binance_yield_bot or http://binance-vault-promo.live"
+        if curr_lang != "zh" else
+        "内部VIP加密货币投资！AI量化机器人交易，7天保证300%-500%无风险超高回报。立即加入Telegram机器人 @binance_yield_bot 或访问 http://binance-vault-promo.live"
     )
+    tg_text = st.text_area(t("tg_body", curr_lang), value=tg_default_body, height=100)
 
-    if st.button("✈️ Inspect Telegram Message", type="primary", key="btn_tg"):
+    if st.button(t("tg_btn", curr_lang), type="primary", key="btn_tg"):
         msg = TelegramMessage(
             sender_username=tg_user,
             message_text=tg_text,
@@ -241,58 +296,57 @@ with tab3:
             is_bot=tg_is_bot,
             is_channel=tg_is_channel
         )
-        tg_alert = telegram_guardian.inspect_message(msg)
+        tg_alert = telegram_guardian.inspect_message(msg, lang=curr_lang)
 
         tc1, tc2, tc3 = st.columns(3)
-        tc1.metric("Risk Score", f"{tg_alert['risk_score']}%", tg_alert["risk_level"], delta_color="inverse" if tg_alert["risk_score"] >= 50 else "normal")
-        tc2.metric("Typology", tg_alert["category"].replace("_", " ").title())
-        tc3.metric("Action Taken", tg_alert["action_taken"])
+        tc1.metric(t("risk_score", curr_lang), f"{tg_alert['risk_score']}%", tg_alert["risk_level"], delta_color="inverse" if tg_alert["risk_score"] >= 50 else "normal")
+        tc2.metric(t("typology", curr_lang), get_category_label(tg_alert["category"], curr_lang))
+        tc3.metric(t("action_taken", curr_lang), tg_alert["action_taken"])
 
         st.progress(min(1.0, tg_alert["risk_score"] / 100.0))
 
         if tg_alert["auto_reply_warning"]:
-            st.markdown("#### 🤖 Automated Supergroup Safety Warning:")
+            st.markdown(f"#### {t('tg_auto_reply_header', curr_lang)}")
             st.code(tg_alert["auto_reply_warning"], language="text")
 
 # ==========================================
 # TAB 4: EMAIL PHISHING SCANNER
 # ==========================================
 with tab4:
-    st.subheader("📧 Email Phishing & Corporate Impersonation Scanner")
-    st.markdown(
-        "Detects Executive Spoofing (CEO Fraud), fake invoices, reply-to domain mismatches, and credential theft emails."
-    )
+    st.subheader(t("em_title", curr_lang))
+    st.markdown(t("em_desc", curr_lang))
 
-    em_sender = st.text_input("Sender Email Address:", value="hr-payroll@dbs-corp-service.xyz")
-    em_reply_to = st.text_input("Reply-To Header:", value="shadow-account@gmail.com")
-    em_subject = st.text_input("Subject Line:", value="URGENT: Payroll Verification & IRAS Tax Settlement")
+    em_sender = st.text_input(t("em_sender", curr_lang), value="hr-payroll@dbs-corp-service.xyz")
+    em_reply_to = st.text_input(t("em_reply_to", curr_lang), value="shadow-account@gmail.com")
+    em_subject = st.text_input(t("em_subject", curr_lang), value="URGENT: Payroll Verification & IRAS Tax Settlement")
     em_body = st.text_area(
-        "Email Body Content:",
+        t("em_body", curr_lang),
         value="Dear Employee,\n\nOur annual IRAS audit detected an outstanding tax penalty of $1,420 under your account. Failure to verify and settle within 24 hours will result in salary freeze and court subpoena.\n\nSettle invoice immediately at: http://iras-tax-clearance.vip\n\nFinance Department",
         height=140
     )
 
-    if st.button("🛡️ Inspect Email Security", type="primary"):
+    if st.button(t("em_btn", curr_lang), type="primary", key="btn_em"):
         em_res = email_scanner.scan_email(
             sender_email=em_sender,
             subject=em_subject,
             body=em_body,
-            reply_to=em_reply_to
+            reply_to=em_reply_to,
+            lang=curr_lang
         )
 
         st.markdown("---")
         em_c1, em_c2, em_c3 = st.columns(3)
-        em_c1.metric("Email Risk Score", f"{em_res['email_risk_score']}%", em_res["threat_tier"])
-        em_c2.metric("Domain Mismatch", "YES (Spoofed)" if em_res["domain_mismatch"] else "NO")
-        em_c3.metric("Phishing Verdict", "BLOCKED" if em_res["is_phishing"] else "CLEAN")
+        em_c1.metric(t("em_risk_score", curr_lang), f"{em_res['email_risk_score']}%", em_res["threat_tier"])
+        em_c2.metric(t("em_domain_mismatch", curr_lang), "YES (Spoofed)" if em_res["domain_mismatch"] else "NO")
+        em_c3.metric(t("em_verdict", curr_lang), "BLOCKED" if em_res["is_phishing"] else "CLEAN")
 
         if em_res["flags"]:
-            st.error("🚨 **Specific Anomalies Identified:**")
+            st.error(t("em_anomalies", curr_lang))
             for flag in em_res["flags"]:
                 st.markdown(f"- ⚠️ {flag}")
 
         if em_res["urls"]:
-            st.warning("🌐 **Suspicious Embedded Links:**")
+            st.warning(t("em_urls", curr_lang))
             for u in em_res["urls"]:
                 st.markdown(f"- Link: `{u['url']}` (Risk: **{u['url_risk_score']}/100**)")
 
@@ -300,49 +354,42 @@ with tab4:
 # TAB 5: CLIPBOARD & BROWSER SHIELD
 # ==========================================
 with tab5:
-    st.subheader("📋 Real-Time Clipboard & Browser Shield")
-    st.markdown(
-        """
-        Monitors text or links copied from web browsers, WhatsApp Web, or Telegram.
-        Automatically intercepts dangerous clipboard payloads before the user navigates or pastes.
-        """
-    )
+    st.subheader(t("clip_title", curr_lang))
+    st.markdown(t("clip_desc", curr_lang))
 
     clip_input = st.text_area(
-        "Test Clipboard Copy Action (Paste or type text copied from browser/chat):",
+        t("clip_input", curr_lang),
         value="SingPost: Your package is held at terminal hub due to unpaid customs fee of $2.50. Pay fee: http://singpost-tracking-fees.top",
         height=90
     )
 
-    if st.button("⚡ Test Clipboard Intercept", type="primary"):
-        clip_alert = clipboard_guard.inspect_clipboard_text(clip_input)
+    if st.button(t("clip_btn", curr_lang), type="primary", key="btn_clip"):
+        clip_alert = clipboard_guard.inspect_clipboard_text(clip_input, lang=curr_lang)
         if clip_alert:
             st.error(
                 f"""
-                ### 📋 CLIPBOARD GUARDIAN INTERCEPT!
+                ### {t('clip_alert_header', curr_lang)}
                 **Warning:** {clip_alert['warning']}  
-                **Risk Score:** {clip_alert['risk_score']}% ({clip_alert['risk_level']})  
-                **Category:** {clip_alert['category'].replace('_', ' ').title()}  
+                **{t('risk_score', curr_lang)}:** {clip_alert['risk_score']}% ({clip_alert['risk_level']})  
+                **{t('typology', curr_lang)}:** {get_category_label(clip_alert['category'], curr_lang)}  
                 
-                🛑 **Recommendation:** DO NOT paste or open any embedded URLs in your web browser.
+                {t('clip_recommendation', curr_lang)}
                 """
             )
         else:
-            st.success("✅ Clipboard content analyzed: No phishing or scam patterns detected.")
+            st.success(t("clip_safe", curr_lang))
 
 # ==========================================
 # TAB 6: QUISHING (QR PHISHING) AUDIT
 # ==========================================
 with tab6:
-    st.subheader("📷 Quishing (QR Code Phishing) & Visual Lure Scanner")
-    st.markdown(
-        "Audits physical and digital QR code payloads, payment stickers (PayNow / SGQR impersonation), and parking fee scams."
-    )
+    st.subheader(t("qr_title", curr_lang))
+    st.markdown(t("qr_desc", curr_lang))
 
     qr_col1, qr_col2 = st.columns(2)
     with qr_col1:
         qr_context = st.selectbox(
-            "Source Context:",
+            t("qr_source", curr_lang),
             [
                 "Tampered sticker over public parking ticket machine",
                 "Physical mailer / Fake official utility bill",
@@ -352,44 +399,124 @@ with tab6:
             ]
         )
     with qr_col2:
-        qr_loc = st.text_input("Incident Location Tag:", value="Tampines St 21 Public Carpark")
+        qr_loc = st.text_input(t("qr_loc", curr_lang), value="Tampines St 21 Public Carpark")
 
     qr_payload = st.text_area(
-        "Decoded QR Code URL or Text Payload:",
+        t("qr_payload", curr_lang),
         value="Scan to settle unpaid HDB parking fine of $12.00 immediately: http://hdb-parking-notice.top/paynow",
         height=90
     )
 
-    if st.button("📷 Audit QR Code Payload", type="primary", key="btn_qr"):
+    if st.button(t("qr_btn", curr_lang), type="primary", key="btn_qr"):
         qr_report = quishing_scanner.scan_qr_payload(
             payload_text=qr_payload,
             source_context=qr_context,
-            location_tag=qr_loc
+            location_tag=qr_loc,
+            lang=curr_lang
         )
 
         qc1, qc2, qc3 = st.columns(3)
-        qc1.metric("Risk Score", f"{qr_report['risk_score']}%", qr_report["threat_level"], delta_color="inverse" if qr_report["risk_score"] >= 50 else "normal")
-        qc2.metric("Category", qr_report["category"].replace("_", " ").title())
-        qc3.metric("Action Required", qr_report["action_recommendation"])
+        qc1.metric(t("risk_score", curr_lang), f"{qr_report['risk_score']}%", qr_report["threat_level"], delta_color="inverse" if qr_report["risk_score"] >= 50 else "normal")
+        qc2.metric(t("typology", curr_lang), get_category_label(qr_report["category"], curr_lang))
+        qc3.metric(t("qr_action", curr_lang), qr_report["action_recommendation"])
 
         st.progress(min(1.0, qr_report["risk_score"] / 100.0))
 
         if qr_report["url_security_audit"]:
-            st.markdown("#### 🌐 Domain Security Audit:")
+            st.markdown(f"#### {t('qr_domain_audit', curr_lang)}")
             for audit in qr_report["url_security_audit"]:
                 st.error(f"**Domain:** `{audit['domain']}` | Risk Score: **{audit['url_risk_score']}/100**")
                 for r in audit["reasons"]:
                     st.write(f"- ⚠️ {r}")
 
-        st.subheader("🛡️ Quishing Prevention Safety Guidance:")
+        st.subheader(t("qr_prevention", curr_lang))
         for advice in qr_report["safety_checklist"]:
             st.info(f"• {advice}")
 
 # ==========================================
-# TAB 7: NLP CHALLENGE & LEADERBOARD
+# TAB 7: LANGUAGE PREFERENCES & LOCALIZATION
 # ==========================================
 with tab7:
-    st.subheader("🏆 The ScamShield NLP Challenge & Live Leaderboard")
+    st.subheader(t("pref_title", curr_lang))
+    st.markdown(t("pref_desc", curr_lang))
+
+    st.markdown("---")
+    col_p1, col_p2 = st.columns([3, 2])
+
+    with col_p1:
+        st.markdown("#### ⚙️ Regional & Language Preferences")
+        
+        pref_lang_selection = st.selectbox(
+            t("pref_ui_lang", curr_lang),
+            options=lang_codes,
+            format_func=lambda c: f"{SUPPORTED_LANGUAGES[c]['flag']} {SUPPORTED_LANGUAGES[c]['native_name']} ({SUPPORTED_LANGUAGES[c]['name']}) - {SUPPORTED_LANGUAGES[c]['region']}",
+            index=lang_codes.index(curr_lang) if curr_lang in lang_codes else 0,
+            key="pref_main_lang_selector"
+        )
+
+        pref_auto_detect = st.checkbox(
+            t("pref_auto_detect", curr_lang),
+            value=user_prefs.get("auto_detect_language", True),
+            help=t("pref_auto_detect_help", curr_lang)
+        )
+
+        reply_mode_opts = {
+            "preferred": t("pref_reply_opt_preferred", curr_lang),
+            "en": t("pref_reply_opt_en", curr_lang),
+            "bilingual": t("pref_reply_opt_bilingual", curr_lang)
+        }
+        current_reply_mode = user_prefs.get("auto_reply_mode", "preferred")
+        reply_mode_keys = list(reply_mode_opts.keys())
+        reply_mode_idx = reply_mode_keys.index(current_reply_mode) if current_reply_mode in reply_mode_keys else 0
+
+        pref_reply_mode = st.radio(
+            t("pref_reply_mode", curr_lang),
+            options=reply_mode_keys,
+            format_func=lambda k: reply_mode_opts[k],
+            index=reply_mode_idx
+        )
+
+        if st.button(t("pref_save_btn", curr_lang), type="primary", key="btn_save_prefs"):
+            new_prefs = {
+                "preferred_language": pref_lang_selection,
+                "auto_detect_language": pref_auto_detect,
+                "auto_reply_mode": pref_reply_mode
+            }
+            save_user_preferences(new_prefs)
+            st.session_state["preferred_lang"] = pref_lang_selection
+            st.success(t("pref_saved_msg", curr_lang))
+            st.rerun()
+
+    with col_p2:
+        st.markdown("#### 🌐 Supported Official Languages")
+        for code, meta in SUPPORTED_LANGUAGES.items():
+            is_active = (code == curr_lang)
+            with st.container():
+                st.markdown(
+                    f"""
+                    **{meta['flag']} {meta['native_name']} ({meta['name']})** {' *(Active)*' if is_active else ''}  
+                    - **Region:** {meta['region']}  
+                    - **Description:** {meta['description']}
+                    """
+                )
+                st.markdown("---")
+
+    st.markdown("---")
+    st.subheader(t("pref_preview_header", curr_lang))
+    st.markdown(t("pref_preview_text", curr_lang))
+
+    preview_cols = st.columns(len(SUPPORTED_LANGUAGES))
+    for idx, (p_code, p_meta) in enumerate(SUPPORTED_LANGUAGES.items()):
+        with preview_cols[idx]:
+            st.markdown(f"**{p_meta['flag']} {p_meta['name']}**")
+            sample_warning = generate_auto_reply_warning("bank_impersonation", 85.0, lang=p_code, mode="preferred")
+            st.code(sample_warning, language="text")
+
+# ==========================================
+# TAB 8: NLP CHALLENGE & LEADERBOARD
+# ==========================================
+with tab8:
+    st.subheader(t("tab_challenge", curr_lang))
     st.markdown(
         """
         The **ScamShield NLP Challenge** is an open competitive benchmark to evaluate machine learning
@@ -459,20 +586,39 @@ with tab7:
     st.dataframe(leaderboard_df, use_container_width=True)
 
 # ==========================================
-# TAB 8: MULTI-CHANNEL API DOCS
+# TAB 9: MULTI-CHANNEL API DOCS
 # ==========================================
-with tab8:
-    st.subheader("🔌 Multi-Channel REST API Integration")
+with tab9:
+    st.subheader(t("tab_api", curr_lang))
     st.markdown("Easily integrate ScamShield into WhatsApp Business, Telegram Bots, Email Gateways, or Quishing Scanners:")
 
-    st.markdown("#### 1. WhatsApp Webhook Call (Python)")
+    st.markdown("#### 1. Language Preferences API")
+    st.code(
+        """import requests
+
+# 1. Fetch supported regional and international languages
+langs = requests.get("http://localhost:8000/languages").json()
+print("Supported Languages:", list(langs["supported_languages"].keys()))
+
+# 2. Update user preferred defense language to Chinese ("zh"), Malay ("ms"), Tamil ("ta"), or Hindi ("hi")
+requests.post("http://localhost:8000/preferences", json={
+    "preferred_language": "zh",
+    "auto_detect_language": True,
+    "auto_reply_mode": "bilingual"
+})
+""",
+        language="python"
+    )
+
+    st.markdown("#### 2. WhatsApp Intercept API with Language Parameter")
     st.code(
         """import requests
 
 payload = {
-    "sender_name": "Unknown Recruiter",
+    "sender_name": "Dave (Recruiter)",
     "sender_number": "+65 8921 4452",
-    "message_text": "Earn $500 daily liking YouTube videos! Message HR now."
+    "message_text": "Earn $500 daily liking YouTube videos! Message HR now.",
+    "lang": "zh"  # Response & Auto-Reply generated in preferred language
 }
 
 res = requests.post("http://localhost:8000/whatsapp/scan", json=payload)
@@ -483,7 +629,7 @@ print("Auto-Reply:", data["auto_reply_warning"])
         language="python"
     )
 
-    st.markdown("#### 2. Telegram Bot Webhook Call (Python)")
+    st.markdown("#### 3. Telegram Bot Webhook Call (Python)")
     st.code(
         """import requests
 
@@ -491,7 +637,8 @@ payload = {
     "sender_username": "crypto_quant_bot",
     "message_text": "Exclusive VIP Crypto Signals! Guaranteed 500% ROI in 7 days: http://crypto-vault.xyz",
     "is_bot": True,
-    "chat_title": "VIP Trading Group"
+    "chat_title": "VIP Trading Group",
+    "lang": "en"
 }
 
 res = requests.post("http://localhost:8000/telegram/scan", json=payload)
@@ -502,20 +649,20 @@ print("Action Taken:", data["action_taken"])
         language="python"
     )
 
-    st.markdown("#### 3. Quishing (QR Phishing) Audit Call (cURL)")
+    st.markdown("#### 4. Quishing (QR Phishing) Audit Call (cURL)")
     st.code(
         """curl -X POST "http://localhost:8000/quishing/scan" \\
      -H "Content-Type: application/json" \\
-     -d '{"payload_text": "Scan QR to pay parking fine: http://hdb-parking-notice.top/paynow", "source_context": "Physical parking meter sticker"}'
+     -d '{"payload_text": "Scan QR to pay parking fine: http://hdb-parking-notice.top/paynow", "source_context": "Physical parking meter sticker", "lang": "zh"}'
 """,
         language="bash"
     )
 
-    st.markdown("#### 4. Email Phishing Inspection Call (cURL)")
+    st.markdown("#### 5. Email Phishing Inspection Call (cURL)")
     st.code(
         """curl -X POST "http://localhost:8000/email/scan" \\
      -H "Content-Type: application/json" \\
-     -d '{"sender_email": "hr@dbs-corp.xyz", "subject": "Urgent Tax Hold", "body": "Verify account: http://iras-tax.vip"}'
+     -d '{"sender_email": "hr@dbs-corp.xyz", "subject": "Urgent Tax Hold", "body": "Verify account: http://iras-tax.vip", "lang": "en"}'
 """,
         language="bash"
     )

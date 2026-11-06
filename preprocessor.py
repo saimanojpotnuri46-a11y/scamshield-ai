@@ -20,7 +20,7 @@ SPOOFED_BRANDS = [
     "shopee", "lazada", "amazon", "apple", "google", "microsoft", "iras", "spf"
 ]
 
-# Urgency and coercion patterns
+# Urgency and coercion patterns (Multilingual: English, Chinese, Malay, Tamil, Hindi)
 URGENCY_PATTERNS = [
     r"\burgent(ly)?\b",
     r"\bimmediat(e|ely)\b",
@@ -33,10 +33,18 @@ URGENCY_PATTERNS = [
     r"\baction required\b",
     r"\bexpire(d|s)? today\b",
     r"\bpenalt(y|ies)\b",
-    r"\b24\s*h(ours?)?\b"
+    r"\b24\s*h(ours?)?\b",
+    # Chinese (zh)
+    r"紧急", r"立即", r"马上", r"冻结", r"逮捕令", r"传票", r"涉嫌", r"24小时", r"失效", r"暂扣",
+    # Malay (ms)
+    r"\bsegera\b", r"\btamat tempoh\b", r"\bdibekukan\b", r"\bwaran tangkap\b", r"\btertunggak\b", r"\btindakan segera\b",
+    # Tamil (ta)
+    r"அவசரம்", r"உடனே", r"முடக்க", r"கைது ஆணை",
+    # Hindi (hi)
+    r"तुरंत", r"जल्द", r"ब्लॉक", r"सस्पेंड", r"अरेस्ट वारंट", r"24 घंटे"
 ]
 
-# Financial bait patterns
+# Financial bait patterns (Multilingual: English, Chinese, Malay, Tamil, Hindi)
 BAIT_PATTERNS = [
     r"\bguaranteed\b",
     r"\b(earn|make) \$\d+.*(daily|per day|day)\b",
@@ -45,17 +53,33 @@ BAIT_PATTERNS = [
     r"\b(lucky draw|promo|prize|jackpot)\b",
     r"\bfree.*voucher\b",
     r"\b\d+%\s*(roi|apy|return|profit)\b",
-    r"\bdouble your (crypto|btc|eth|money)\b"
+    r"\bdouble your (crypto|btc|eth|money)\b",
+    # Chinese (zh)
+    r"保证", r"日赚", r"兼职", r"刷单", r"高额回报", r"躺赚", r"中奖", r"抽奖",
+    # Malay (ms)
+    r"\bdijamin\b", r"\bjana.*sehari\b", r"\bkerja sambilan\b", r"\bpulangan\b", r"\bhadiah\b",
+    # Tamil (ta)
+    r"உத்தரவாதம்", r"தினமும் சம்பாதிக்க", r"பரிசு",
+    # Hindi (hi)
+    r"गारंटीड", r"घर बैठे कमाएं", r"दैनिक कमाई", r"लॉटरी", r"बंपर इनाम"
 ]
 
-# Credential / OTP solicitation patterns
+# Credential / OTP solicitation patterns (Multilingual: English, Chinese, Malay, Tamil, Hindi)
 CREDENTIAL_PATTERNS = [
     r"\bverify.*(identity|account|card|details)\b",
     r"\benter.*(otp|pin|password|token)\b",
     r"\bre-?activate.*(token|account|access)\b",
     r"\bclearance fee\b",
     r"\bcustoms duty\b",
-    r"\bpay.*fee to release\b"
+    r"\bpay.*fee to release\b",
+    # Chinese (zh)
+    r"验证码", r"动态口令", r"激活", r"密码", r"关税", r"清关费", r"放行",
+    # Malay (ms)
+    r"\bkata laluan\b", r"\baktifkan semula\b", r"\bcukai kastam\b", r"\bbayaran pelepasan\b", r"\btoken digital\b",
+    # Tamil (ta)
+    r"கடவுச்சொல்", r"டோக்கன்", r"சுங்க வரி",
+    # Hindi (hi)
+    r"ओटीपी", r"पासवर्ड", r"पिन", r"केवाईसी", r"कस्टम शुल्क", r"सक्रिय करें"
 ]
 
 # Leetspeak / homoglyph mapping table

@@ -25,6 +25,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.pipeline import ScamShieldPipeline
 from src.preprocessor import extract_urls
+from src.localization import generate_auto_reply_warning, get_category_label
 
 class TelegramMessage:
     def __init__(
@@ -65,17 +66,19 @@ class TelegramGuardian:
         self.pipeline = pipeline or ScamShieldPipeline()
         self.alert_history: List[Dict[str, Any]] = []
 
-    def inspect_message(self, message: TelegramMessage) -> Dict[str, Any]:
+    def inspect_message(self, message: TelegramMessage, lang: Optional[str] = None) -> Dict[str, Any]:
         """
         Inspects an incoming Telegram message, evaluating crypto signals,
-        fake admin impersonations, and social engineering manipulation.
+        fake admin impersonations, and social engineering manipulation with language preference support.
         """
-        scan_result = self.pipeline.scan_message(message.message_text)
+        scan_result = self.pipeline.scan_message(message.message_text, lang=lang)
 
         is_scam = scan_result["is_scam"]
         risk_score = scan_result["risk_score"]
         category = scan_result["category"]
+        category_label = scan_result.get("category_label", category)
         risk_level = scan_result["risk_level"]
+        active_lang = lang or scan_result.get("language")
 
         # Channel-specific heuristics: Telegram Invite links & Bot Handles
         urls = extract_urls(message.message_text)
@@ -103,11 +106,7 @@ class TelegramGuardian:
         # Automated Safety Reply for Supergroup / Channel
         auto_reply = ""
         if is_scam:
-            auto_reply = (
-                f"🛡️ [SCAMSHIELD TELEGRAM GUARDIAN]\n"
-                f"🚨 WARNING: User @{message.sender_username.lstrip('@')} sent potential {category.replace('_', ' ').upper()} (Risk: {risk_score:.1f}%).\n"
-                f"❌ Never share seed phrases, send crypto to unverified addresses, or click external invite links!"
-            )
+            auto_reply = generate_auto_reply_warning(category, risk_score, lang=active_lang)
 
         alert = {
             "timestamp": message.timestamp,
