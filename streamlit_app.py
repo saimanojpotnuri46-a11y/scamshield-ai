@@ -6,7 +6,7 @@ Production self-healing launcher that automatically handles:
 - Auto-extracting uploaded .zip packages safely
 - Bidirectional syncing between root and src/
 - Ensuring challenge/, models/, and data/ paths are always populated
-- Pre-registering sys.modules so 'src.localization' never throws ModuleNotFoundError
+- sys.modules registration so 'src.localization' and 'localization' never throw ModuleNotFoundError
 """
 
 import os
@@ -91,7 +91,7 @@ if os.path.exists(src_dir):
                 except Exception:
                     pass
 
-# 4. Synthesize localization.py on disk if completely absent from repository
+# 4. Synthesize localization.py on disk if completely absent
 loc_src = os.path.join(src_dir, "localization.py")
 loc_root = os.path.join(ROOT_DIR, "localization.py")
 if not os.path.exists(loc_src) and not os.path.exists(loc_root):
@@ -100,7 +100,11 @@ from typing import Dict, List, Any, Optional
 
 DEFAULT_LANGUAGE = "en"
 SUPPORTED_LANGUAGES = {
-    "en": {"code": "en", "name": "English", "native_name": "English", "flag": "🇬🇧"}
+    "en": {"code": "en", "name": "English", "native_name": "English", "flag": "🇬🇧", "region": "India / Global"},
+    "te": {"code": "te", "name": "Telugu", "native_name": "తెలుగు", "flag": "🇮🇳", "region": "Andhra Pradesh / Telangana"},
+    "hi": {"code": "hi", "name": "Hindi", "native_name": "हिन्दी", "flag": "🇮🇳", "region": "India"},
+    "ta": {"code": "ta", "name": "Tamil", "native_name": "தமிழ்", "flag": "🇮🇳", "region": "Tamil Nadu"},
+    "ms": {"code": "ms", "name": "Malay", "native_name": "Bahasa Melayu", "flag": "🇲🇾", "region": "Malaysia"}
 }
 _STRINGS = {
     "app_title": "🛡️ ScamShield Multi-Channel Fraud Defense System",

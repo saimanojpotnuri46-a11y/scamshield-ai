@@ -23,27 +23,135 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
-from src.pipeline import ScamShieldPipeline
-from src.whatsapp_guardian import WhatsAppGuardian, WhatsAppMessage
-from src.email_scanner import EmailPhishingScanner
-from src.clipboard_guard import ClipboardGuard
-from src.telegram_guardian import TelegramGuardian, TelegramMessage
-from src.qr_scanner import QuishingScanner
-from src.localization import (
-    SUPPORTED_LANGUAGES,
-    DEFAULT_LANGUAGE,
-    t,
-    get_current_language,
-    set_current_language,
-    load_user_preferences,
-    save_user_preferences,
-    get_localized_presets,
-    get_category_label,
-    generate_auto_reply_warning,
-    detect_language
-)
-from challenge.evaluate_submission import evaluate
-from challenge.leaderboard import get_leaderboard_dataframe, register_submission
+try:
+    from src.pipeline import ScamShieldPipeline
+    from src.whatsapp_guardian import WhatsAppGuardian, WhatsAppMessage
+    from src.email_scanner import EmailPhishingScanner
+    from src.clipboard_guard import ClipboardGuard
+    from src.telegram_guardian import TelegramGuardian, TelegramMessage
+    from src.qr_scanner import QuishingScanner
+except ModuleNotFoundError:
+    from pipeline import ScamShieldPipeline
+    from whatsapp_guardian import WhatsAppGuardian, WhatsAppMessage
+    from email_scanner import EmailPhishingScanner
+    from clipboard_guard import ClipboardGuard
+    from telegram_guardian import TelegramGuardian, TelegramMessage
+    from qr_scanner import QuishingScanner
+
+try:
+    from src.localization import (
+        SUPPORTED_LANGUAGES,
+        DEFAULT_LANGUAGE,
+        t,
+        get_current_language,
+        set_current_language,
+        load_user_preferences,
+        save_user_preferences,
+        get_localized_presets,
+        get_category_label,
+        generate_auto_reply_warning,
+        detect_language
+    )
+except ModuleNotFoundError:
+    try:
+        from localization import (
+            SUPPORTED_LANGUAGES,
+            DEFAULT_LANGUAGE,
+            t,
+            get_current_language,
+            set_current_language,
+            load_user_preferences,
+            save_user_preferences,
+            get_localized_presets,
+            get_category_label,
+            generate_auto_reply_warning,
+            detect_language
+        )
+    except ModuleNotFoundError:
+        DEFAULT_LANGUAGE = "en"
+        SUPPORTED_LANGUAGES = {
+            "en": {
+                "code": "en",
+                "name": "English",
+                "native_name": "English",
+                "flag": "🇬🇧",
+                "region": "India / Global",
+                "description": "Standard English cybersecurity terminology"
+            },
+            "te": {
+                "code": "te",
+                "name": "Telugu",
+                "native_name": "తెలుగు",
+                "flag": "🇮🇳",
+                "region": "Andhra Pradesh / Telangana / India",
+                "description": "సైబర్ మోసాల నిరోధక రక్షణ పదజాలం (Telugu Cyber Defense)"
+            },
+            "hi": {
+                "code": "hi",
+                "name": "Hindi",
+                "native_name": "हिन्दी",
+                "flag": "🇮🇳",
+                "region": "India / South Asia",
+                "description": "साइबर धोखाधड़ी रक्षा शब्दावली (Hindi Cyber Defense)"
+            },
+            "ta": {
+                "code": "ta",
+                "name": "Tamil",
+                "native_name": "தமிழ்",
+                "flag": "🇮🇳",
+                "region": "Tamil Nadu / South Asia",
+                "description": "மோசடி எதிர்ப்பு பாதுகாப்பு சொற்கள் (Tamil Cyber Defense)"
+            },
+            "ms": {
+                "code": "ms",
+                "name": "Malay",
+                "native_name": "Bahasa Melayu",
+                "flag": "🇲🇾",
+                "region": "Malaysia / Singapore",
+                "description": "Terminologi pertahanan penipuan siber Bahasa Melayu"
+            }
+        }
+        _TRANSLATIONS_FALLBACK = {
+            "app_title": "ScamShield AI",
+            "app_subtitle": "Multi-Channel Social Engineering & Smishing Defense Platform",
+            "nav_live_scanner": "🛡️ Live SMS / Text Scanner",
+            "nav_whatsapp": "💬 WhatsApp Guardian",
+            "nav_telegram": "✈️ Telegram Guardian",
+            "nav_email": "📧 Email Phishing Gateway",
+            "nav_clipboard": "📋 Clipboard Monitor",
+            "nav_qr": "📷 QR Code Quishing Audit",
+            "nav_challenge": "🏆 NLP Benchmark Challenge",
+            "nav_localization": "🌐 Language Preferences",
+            "scan_button": "Scan for Threats",
+            "threat_detected": "Threat Detected!",
+            "safe_message": "Message Appears Safe",
+        }
+        def t(key, lang=None, **kwargs):
+            val = _TRANSLATIONS_FALLBACK.get(key, key)
+            if kwargs:
+                try: val = val.format(**kwargs)
+                except Exception: pass
+            return val
+        def get_current_language(): return "en"
+        def set_current_language(code): return "en"
+        def load_user_preferences(): return {"language": "en", "auto_detect_language": True}
+        def save_user_preferences(prefs): return prefs
+        def get_localized_presets(lang=None): return []
+        def get_category_label(cat, lang=None): return cat.replace("_", " ").title()
+        def generate_auto_reply_warning(sender, text, is_scam, prob, cat, lang=None):
+            return f"⚠️ [SCAMSHIELD ADVISORY]: Suspected {cat.replace('_', ' ').title()} threat detected ({prob*100:.1f}% risk)."
+        def detect_language(text): return "en"
+try:
+    from challenge.evaluate_submission import evaluate
+    from challenge.leaderboard import get_leaderboard_dataframe, register_submission
+except ModuleNotFoundError:
+    try:
+        from evaluate_submission import evaluate
+        from leaderboard import get_leaderboard_dataframe, register_submission
+    except ModuleNotFoundError:
+        evaluate = None
+        get_leaderboard_dataframe = None
+        register_submission = None
 
 # Cache pipeline and guardians
 @st.cache_resource
@@ -87,7 +195,7 @@ lang_labels = [
 current_lang_idx = lang_codes.index(curr_lang) if curr_lang in lang_codes else 0
 
 selected_lang_label = st.sidebar.selectbox(
-    "Select Language / 选择语言:",
+    "Select Language / భాషను ఎంచుకోండి:",
     options=lang_labels,
     index=current_lang_idx,
     key="sb_language_selector"
@@ -222,11 +330,9 @@ with tab2:
         wa_group_name = st.text_input(t("wa_group_name", curr_lang), value="Singapore Part-Time Job Seekers") if wa_is_group else None
         
         wa_default_msg = (
+            "నమస్కారం! ఇంటి నుండే రోజుకు ₹5,000 - ₹15,000 సంపాదించండి! యూట్యూబ్ వీడియోలు లైక్ చేయండి & రేటింగ్ ఇవ్వండి: http://job-daily-income.xyz"
+            if curr_lang == "te" else
             "Hi all! Earn $300-$800 daily working from home! Simple task: like YouTube videos and review products. Daily payout via PayNow. Register: http://job-daily-income.xyz"
-            if curr_lang == "en" else
-            "居家兼职诚招人员！每天轻松点赞YouTube视频和评测商品，日赚$200-$600新币，当日PayNow结算。立即添加WhatsApp: +65 8921 4452"
-            if curr_lang == "zh" else
-            "Jana $200-$600 sehari bekerja dari rumah! Tugas mudah: tonton dan like video YouTube. Bayaran harian via PayNow: http://job-daily-income.xyz"
         )
         wa_body = st.text_area(t("wa_body", curr_lang), value=wa_default_msg, height=110)
 
@@ -282,9 +388,9 @@ with tab3:
         tg_is_channel = st.checkbox(t("tg_is_channel", curr_lang), value=False)
 
     tg_default_body = (
+        "ప్రత్యేక VIP క్రిప్టో సిగ్నల్స్! AI ఆటోమేటెడ్ బాట్ ద్వారా 7 రోజుల్లో 300% నుండి 500% వరకు ఖచ్చితమైన లాభాలు. టెలిగ్రామ్ @in_crypto_vip లేదా http://binance-vault-promo.live లో చేరండి."
+        if curr_lang == "te" else
         "Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram bot @binance_yield_bot or http://binance-vault-promo.live"
-        if curr_lang != "zh" else
-        "内部VIP加密货币投资！AI量化机器人交易，7天保证300%-500%无风险超高回报。立即加入Telegram机器人 @binance_yield_bot 或访问 http://binance-vault-promo.live"
     )
     tg_text = st.text_area(t("tg_body", curr_lang), value=tg_default_body, height=100)
 
@@ -600,9 +706,9 @@ with tab9:
 langs = requests.get("http://localhost:8000/languages").json()
 print("Supported Languages:", list(langs["supported_languages"].keys()))
 
-# 2. Update user preferred defense language to Chinese ("zh"), Malay ("ms"), Tamil ("ta"), or Hindi ("hi")
+# 2. Update user preferred defense language to Telugu ("te"), Hindi ("hi"), Tamil ("ta"), or Malay ("ms")
 requests.post("http://localhost:8000/preferences", json={
-    "preferred_language": "zh",
+    "preferred_language": "te",
     "auto_detect_language": True,
     "auto_reply_mode": "bilingual"
 })
@@ -616,9 +722,9 @@ requests.post("http://localhost:8000/preferences", json={
 
 payload = {
     "sender_name": "Dave (Recruiter)",
-    "sender_number": "+65 8921 4452",
-    "message_text": "Earn $500 daily liking YouTube videos! Message HR now.",
-    "lang": "zh"  # Response & Auto-Reply generated in preferred language
+    "sender_number": "+91 98214 44521",
+    "message_text": "Earn ₹5,000 daily liking YouTube videos! Message HR now.",
+    "lang": "te"  # Response & Auto-Reply generated in preferred language
 }
 
 res = requests.post("http://localhost:8000/whatsapp/scan", json=payload)
@@ -653,7 +759,7 @@ print("Action Taken:", data["action_taken"])
     st.code(
         """curl -X POST "http://localhost:8000/quishing/scan" \\
      -H "Content-Type: application/json" \\
-     -d '{"payload_text": "Scan QR to pay parking fine: http://hdb-parking-notice.top/paynow", "source_context": "Physical parking meter sticker", "lang": "zh"}'
+     -d '{"payload_text": "Scan QR to pay parking fine: http://hdb-parking-notice.top/paynow", "source_context": "Physical parking meter sticker", "lang": "te"}'
 """,
         language="bash"
     )

@@ -18,40 +18,40 @@ SUPPORTED_LANGUAGES: Dict[str, Dict[str, str]] = {
         "name": "English",
         "native_name": "English",
         "flag": "🇬🇧",
-        "region": "Singapore / Global",
+        "region": "India / Global",
         "description": "Standard English cybersecurity terminology"
     },
-    "zh": {
-        "code": "zh",
-        "name": "Chinese (Simplified)",
-        "native_name": "简体中文",
-        "flag": "🇨🇳",
-        "region": "Singapore (华语) / International",
-        "description": "本地化反诈术语与预设案例 (Chinese Fraud Defense)"
-    },
-    "ms": {
-        "code": "ms",
-        "name": "Malay",
-        "native_name": "Bahasa Melayu",
-        "flag": "🇲🇾",
-        "region": "Singapore (Melayu) / Malaysia",
-        "description": "Terminologi pertahanan penipuan siber Bahasa Melayu"
-    },
-    "ta": {
-        "code": "ta",
-        "name": "Tamil",
-        "native_name": "தமிழ்",
+    "te": {
+        "code": "te",
+        "name": "Telugu",
+        "native_name": "తెలుగు",
         "flag": "🇮🇳",
-        "region": "Singapore (தமிழ்) / South Asia",
-        "description": "மோசடி எதிர்ப்பு பாதுகாப்பு சொற்கள் (Tamil Cyber Defense)"
+        "region": "Andhra Pradesh / Telangana / India",
+        "description": "సైబర్ మోసాల నిరోధక రక్షణ పదజాలం (Telugu Cyber Defense)"
     },
     "hi": {
         "code": "hi",
         "name": "Hindi",
         "native_name": "हिन्दी",
         "flag": "🇮🇳",
-        "region": "South Asia / Global Diaspora",
+        "region": "India / South Asia",
         "description": "साइबर धोखाधड़ी रक्षा शब्दावली (Hindi Cyber Defense)"
+    },
+    "ta": {
+        "code": "ta",
+        "name": "Tamil",
+        "native_name": "தமிழ்",
+        "flag": "🇮🇳",
+        "region": "Tamil Nadu / South Asia",
+        "description": "மோசடி எதிர்ப்பு பாதுகாப்பு சொற்கள் (Tamil Cyber Defense)"
+    },
+    "ms": {
+        "code": "ms",
+        "name": "Malay",
+        "native_name": "Bahasa Melayu",
+        "flag": "🇲🇾",
+        "region": "Malaysia / Singapore",
+        "description": "Terminologi pertahanan penipuan siber Bahasa Melayu"
     }
 }
 
@@ -109,22 +109,22 @@ def set_current_language(lang_code: str) -> bool:
 def detect_language(text: str) -> str:
     """
     Lightweight heuristic language detector for incoming messages:
-    Detects Chinese, Tamil, Hindi, Malay, or defaults to English.
+    Detects Telugu, Hindi, Tamil, Malay, or defaults to English.
     """
     if not text or not isinstance(text, str):
         return DEFAULT_LANGUAGE
     
-    # Check for Chinese characters
-    if re.search(r"[\u4e00-\u9fff]", text):
-        return "zh"
-    
-    # Check for Tamil script
-    if re.search(r"[\u0b80-\u0bff]", text):
-        return "ta"
+    # Check for Telugu script or common romanized Telugu
+    if re.search(r"[\u0c00-\u0c7f]", text) or re.search(r"\b(nenu|cheyandi|vachayi|dabbulu|nijamgane|avunura|kavali)\b", text, re.I):
+        return "te"
         
     # Check for Devanagari (Hindi) script
     if re.search(r"[\u0900-\u097f]", text):
         return "hi"
+        
+    # Check for Tamil script
+    if re.search(r"[\u0b80-\u0bff]", text):
+        return "ta"
         
     # Check for distinct Malay vocabulary
     malay_keywords = [
@@ -147,6 +147,7 @@ SAMPLE_PRESETS_BY_LANG: Dict[str, Dict[str, str]] = {
     "en": {
         "🏦 OCBC Bank Token Phishing": "OCBC Bank: Your digital token has expired today. Re-activate your access now at http://ocbc-auth-portal.online to avoid permanent account freeze.",
         "📦 SingPost Customs Fee Scam": "SingPost: Your package SG920192 is held at our distribution hub due to unpaid customs fee of $2.50. Pay fee to release: http://singpost-tracking-fees.top",
+        "💸 Fake Loan / Money Transfer Scam": "Fast Cash Loan Approved! You have been pre-approved for SGD 10,00,0 personal loan at 1.2% interest. Transfer SGD 150 processing fee to release money immediately: http://fast-loan-disbursement.vip",
         "💼 WhatsApp Part-Time Job Scam": "Earn $200-$600 daily working from home! Simple task: like YouTube videos and review products. No experience needed. Contact WhatsApp: +65 8921 4452",
         "📈 Crypto Guaranteed 500% ROI": "Exclusive VIP Crypto Signals! Guaranteed 300% to 500% returns in 7 days using automated AI quant bot. Join Telegram @sg_crypto_admin or http://crypto-vault-multiplier.live",
         "⚖️ Police Arrest Warrant Threat": "Singapore Police Force Notice: An arrest warrant has been issued under your IC for transnational money laundering. Contact Inspector Tan immediately at +65 6712 9012",
@@ -155,20 +156,22 @@ SAMPLE_PRESETS_BY_LANG: Dict[str, Dict[str, str]] = {
         "🟢 Genuine Courier Delivery (Ham)": "Your package from Amazon order #112-9281928 is out for delivery today. Track in the official Amazon app.",
         "🟢 Genuine Personal SMS (Ham)": "Hey! Are we still meeting for lunch at 12:30pm tomorrow at Bugis Junction? Let me know!"
     },
-    "zh": {
-        "🏦 华侨银行 (OCBC) 电子令牌失效钓鱼": "华侨银行紧急通知：您的数字安全令牌已于今日失效。请立即登录 http://ocbc-auth-portal.online 重新激活，否则您的账户将在2小时内被永久冻结。",
-        "📦 新加坡邮政 (SingPost) 关税未付诈骗": "新加坡邮政：您的包裹 SG920192 因欠付海关清关关税 $2.50 元已被暂扣。请立即点击支付以放行包裹：http://singpost-tracking-fees.top",
-        "💼 WhatsApp 兼职点赞日赚$500诈骗": "居家兼职诚招人员！每天轻松点赞YouTube视频和评测商品，日赚$200-$600新币，当日PayNow结算。无需经验，立即添加WhatsApp: +65 8921 4452",
-        "📈 虚拟货币量化保本高收益陷阱": "内部VIP加密货币投资！AI量化机器人交易，7天保证300%-500%无风险超高回报。立即加入Telegram官方频道 @sg_crypto_admin 或访问 http://crypto-vault-multiplier.live",
-        "⚖️ 警察部队洗钱逮捕令威胁": "新加坡警察部队通知：因涉嫌特大跨国非法洗钱犯罪，已签发针对您身份证的紧急逮捕令。请立即致电陈警官接受调查：+65 6712 9012",
-        "💻 微软安全中心电脑病毒警报": "微软紧急安全中心：检测到您的Windows电脑感染特洛伊木马，银行卡密码正在泄露！请立刻致电免费支持电话 +1-800-419-0921 进行修复。",
-        "🟢 真实银行动态口令短信 (正常安全)": "您登录华侨银行数字账户的动态密码(OTP)为 829104。有效期3分钟。请勿向任何人透露此密码（包括银行工作人员）。",
-        "🟢 真实电商包裹派送通知 (正常安全)": "您在亚马逊购买的订单 #112-9281928 正在派送中，预计今日送达。可通过亚马逊官方应用查看物流进度。",
-        "🟢 真实朋友日常联络短信 (正常安全)": "嗨！我们明天中午12点半在武吉士白沙浮广场吃午饭的安排不变吧？收到请回复我哦！"
+    "te": {
+        "🏦 బ్యాంక్ ఖాతా బ్లాక్ & డిజిటల్ టోకెన్ ఫిషింగ్": "SBI / HDFC బ్యాంక్: మీ డిజిటల్ సెక్యూరిటీ టోకెన్ గడువు నేటితో ముగిసింది. ఖాతా శాశ్వతంగా బ్లాక్ అవ్వకుండా ఉండటానికి వెంటనే http://sbi-token-kyc.online లో లాగిన్ అయి యాక్టివేట్ చేయండి.",
+        "📦 పోస్టల్ పార్సెల్ కస్టమ్స్ డ్యూటీ మోసం": "ఇండియా పోస్ట్: కస్టమ్స్ డ్యూటీ ఫీజు ₹145 చెల్లించనందున మీ పార్సెల్ IN829102 నిలిపివేయబడింది. పార్సెల్ విడుదల చేయడానికి వెంటనే చెల్లించండి: http://indiapost-customs-track.top",
+        "💸 నకిలీ పర్సనల్ లోన్ & మనీ ట్రాన్స్‌ఫర్ మోసం": "తక్షణ పర్సనల్ లోన్ మంజూరైంది! మీ పేరుపై ₹1,00,000 లోన్ 1% వడ్డీతో ఆమోదించబడింది. వెంటనే లోన్ మొత్తం పొందడానికి ₹1,500 ప్రాసెసింగ్ ఫీజు చెల్లించండి: http://fast-loan-disbursement.vip",
+        "💼 వర్క్ ఫ్రమ్ హోమ్ పార్ట్ టైమ్ జాబ్ ఫ్రాడ్": "ఇంటి నుండే రోజుకు ₹5,000 - ₹15,000 సంపాదించండి! యూట్యూబ్ వీడియోలు లైక్ చేయండి & రేటింగ్ ఇవ్వండి. ఎటువంటి అనుభవం అవసరం లేదు. వెంటనే వాట్సాప్ చేయండి: +91 98214 44521",
+        "📈 క్రిప్టో 500% గ్యారెంటీడ్ రిటర్న్ పోంజీ స్కీమ్": "ప్రత్యేక VIP క్రిప్టో సిగ్నల్స్! AI ఆటోమేటెడ్ బాట్ ద్వారా 7 రోజుల్లో 300% నుండి 500% వరకు ఖచ్చితమైన లాభాలు. టెలిగ్రామ్ @in_crypto_vip లేదా http://crypto-vault-multiplier.live లో చేరండి.",
+        "⚖️ పోలీస్ అరెస్ట్ వారెంట్ & మనీలాండరింగ్ బెదిరింపు": "పోలీస్ హెడ్‌క్వార్టర్స్ నోటీసు: మనీలాండరింగ్ కేసులో మీ ఆధార్ నంబర్‌పై అరెస్ట్ వారెంట్ జారీ చేయబడింది. వెంటనే ఇన్‌స్పెక్టర్ వర్మతో +91 80212 90123 లో మాట్లాడండి.",
+        "💻 మైక్రోసాఫ్ట్ సెక్యూరిటీ వైరస్ అలర్ట్": "మైక్రోసాఫ్ట్ సెక్యూరిటీ హెచ్చరిక: మీ కంప్యూటర్‌లో ప్రమాదకరమైన ట్రోజన్ వైరస్ గుర్తించబడింది! మీ బ్యాంక్ వివరాలు లీక్ అవుతున్నాయి. వెంటనే టోల్-ఫ్రీ నంబర్ +1-800-419-0921 కి కాల్ చేయండి.",
+        "🟢 నిజమైన బ్యాంక్ ఓటీపీ (సురక్షితం)": "మీ నెట్ బ్యాంకింగ్ లాగిన్ కోసం ఓటీపీ (OTP) 829104. ఇది 3 నిమిషాల వరకు మాత్రమే చెల్లుబాటు అవుతుంది. మీ ఓటీపీని ఎవరితోనూ (బ్యాంక్ అధికారులతో సహా) పంచుకోవద్దు.",
+        "🟢 నిజమైన కొరియర్ డెలివరీ సందేశం (సురక్షితం)": "మీ అమెజాన్ ఆర్డర్ #402-9182918 ఈరోజు డెలివరీ చేయబడుతుంది. అధికారిక అమెజాన్ యాప్‌లో ట్రాక్ చేయండి.",
+        "🟢 వ్యక్తిగత సాధారణ సందేశం (సురక్షితం)": "హలో! రేపు మధ్యాహ్నం 1:00 గంటకు లంచ్ కోసం కలుస్తున్నామా? నాకు మెసేజ్ చేయి."
     },
     "ms": {
         "🏦 Phishing Token Bank OCBC Dinyahaktif": "Bank OCBC: Token digital anda telah tamat tempoh hari ini. Aktifkan semula akses anda sekarang di http://ocbc-auth-portal.online untuk mengelakkan akaun anda dibekukan serta-merta.",
         "📦 SingPost Bayaran Cukai Kastam Tertunggak": "SingPost: Bungkusan anda SG920192 ditahan di pusat agihan kerana cukai kastam belum dibayar sebanyak $2.50. Buat bayaran segera untuk pelepasan: http://singpost-tracking-fees.top",
+        "💸 Penipuan Pinjaman Wang Segera": "Pinjaman Wang Segera Diluluskan! Anda layak untuk pinjaman peribadi sebanyak SGD 10,000. Pindahkan yuran pemprosesan SGD 150 untuk melepaskan wang serta-merta: http://fast-loan-disbursement.vip",
         "💼 Tawaran Kerja Sambilan WhatsApp $300 Sehari": "Jana $200-$600 sehari bekerja dari rumah! Tugas mudah: tonton dan like video YouTube. Pembayaran harian melalui PayNow. Hubungi WhatsApp: +65 8921 4452",
         "📈 Isyarat Kripto Pulangan Dijamin 500%": "Isyarat Kripto VIP Eksklusif! Jaminan pulangan 300% hingga 500% dalam masa 7 hari menggunakan bot AI kuantitatif. Sertai Telegram @sg_crypto_admin atau http://crypto-vault-multiplier.live",
         "⚖️ Amaran Waran Tangkap Polis SPF": "Notis Pasukan Polis Singapura: Waran tangkap telah dikeluarkan atas nombor kad pengenalan anda kerana terlibat dalam penggubahan wang haram. Hubungi Inspektor Tan segera di +65 6712 9012",
@@ -180,6 +183,7 @@ SAMPLE_PRESETS_BY_LANG: Dict[str, Dict[str, str]] = {
     "ta": {
         "🏦 வங்கி டோக்கன் முடக்கம் & போலி இணைப்பு": "OCBC வங்கி: உங்கள் டிஜிட்டல் டோக்கன் காலாவதியாகிவிட்டது. கணக்கு முடக்கப்படுவதைத் தவிர்க்க http://ocbc-auth-portal.online இல் உடனே புதுப்பிக்கவும்.",
         "📦 பார்சல் சுங்க வரி செலுத்துதல் மோசடி": "SingPost: உங்கள் பார்சல் SG920192 க்கான சுங்க கட்டணம் $2.50 நிலுவையில் உள்ளதால் நிறுத்தி வைக்கப்பட்டுள்ளது. விடுவிக்க கட்டணம் செலுத்தவும்: http://singpost-tracking-fees.top",
+        "💸 போலி உடனடி கடன் & பண மோசடி": "உடனடி கடன் ஒப்புதல்! உங்களுக்கு SGD 10,000 தனிநபர் கடன் அங்கீகரிக்கப்பட்டுள்ளது. பணத்தை உடனே பெற SGD 150 செயலாக்க கட்டணம் செலுத்தவும்: http://fast-loan-disbursement.vip",
         "💼 பகுதி நேர வேலை வாய்ப்பு தினசரி $500 மோசடி": "வீட்டிலிருந்தே தினமும் $200 முதல் $600 வரை சம்பாதிக்கலாம்! YouTube வீடியோக்களை லைக் செய்யவும். அனுபவம் தேவையில்லை. வாட்ஸ்அப்பில் தொடர்பு கொள்ளவும்: +65 8921 4452",
         "📈 கிரிப்டோ 500% உத்தரவாத லாப மோசடி": "விஐபி கிரிப்டோ சிக்னல்கள்! 7 நாட்களில் 300% முதல் 500% வரை உத்தரவாத லாபம். டெலிகிராமில் இணையுங்கள் @sg_crypto_admin அல்லது http://crypto-vault-multiplier.live",
         "⚖️ காவல்துறை கைது ஆணை மிரட்டல்": "சிங்கப்பூர் காவல்துறை அறிவிப்பு: பணமோசடி வழக்கில் உங்கள் மீது கைது ஆணை பிறப்பிக்கப்பட்டுள்ளது. உடனே ஆய்வாளர் டானை +65 6712 9012 இல் அழைக்கவும்.",
@@ -189,12 +193,25 @@ SAMPLE_PRESETS_BY_LANG: Dict[str, Dict[str, str]] = {
     "hi": {
         "🏦 बैंक डिजिटल टोकन सस्पेंशन व फर्जी लिंक": "OCBC बैंक: आपका डिजिटल सुरक्षा टोकन आज समाप्त हो गया है। स्थायी खाता ब्लॉक से बचने के लिए अभी http://ocbc-auth-portal.online पर लॉगिन कर पुनः सक्रिय करें।",
         "📦 सिंगपोस्ट कस्टम्स ड्यूटी बकाया पार्सल स्कैम": "SingPost: कस्टम शुल्क $2.50 बकाया होने के कारण आपका पार्सल SG920192 रोका गया है। पार्सल रिलीज कराने के लिए तुरंत भुगतान करें: http://singpost-tracking-fees.top",
+        "💸 फर्जी इंस्टेंट लोन व मनी ट्रांसफर फ्रॉड": "तत्काल पर्सनल लोन स्वीकृत! आपके नाम ₹1,00,000 का पर्सनल लोन 1% ब्याज दर पर मंजूर हुआ है। राशि तुरंत खाते में पाने के लिए ₹1,500 प्रोसेसिंग फीस ट्रांसफर करें: http://fast-loan-disbursement.vip",
         "💼 वर्क फ्रॉम होम पार्ट टाइम जॉब फर्जीवाड़ा": "घर बैठे रोजाना ₹15,000 - ₹30,000 कमाएं! केवल यूट्यूब वीडियो लाइक करें और रिव्यू दें। कोई अनुभव आवश्यक नहीं। व्हाट्सएप पर संपर्क करें: +65 8921 4452",
         "📈 क्रिप्टो गारंटीड 500% रिटर्न पोंजी स्कीम": "एक्सक्लूसिव वीआईपी क्रिप्टो सिग्नल्स! एआई बॉट द्वारा 7 दिनों में 300% से 500% गारंटीड रिटर्न। तुरंत टेलीग्राम चैनल @sg_crypto_admin या http://crypto-vault-multiplier.live पर जुड़ें।",
         "⚖️ पुलिस अरेस्ट वारंट व मनी लॉन्ड्रिंग धमकी": "सिंगापुर पुलिस बल नोटिस: मनी लॉन्ड्रिंग मामले में आपके पहचान पत्र पर गिरफ्तारी वारंट जारी हुआ है। तुरंत इंस्पेक्टर टैन से +65 6712 9012 पर संपर्क करें।",
         "💻 माइक्रोसॉफ्ट सुरक्षा चेतावनी ट्रोजन वायरस": "माइक्रोसॉफ्ट सिक्योरिटी: आपके कंप्यूटर में गंभीर ट्रोजन वायरस पाया गया है! पासवर्ड व कार्ड चोरी हो रहे हैं। तुरंत टोल-फ्री +1-800-419-0921 पर कॉल करें।",
         "🟢 वास्तविक बैंक ओटीपी संदेश (सुरक्षित)": "OCBC बैंक में लॉगिन के लिए आपका ओटीपी 829104 है। यह 3 मिनट तक वैध है। अपना ओटीपी कभी किसी के साथ साझा न करें।",
         "🟢 पार्सल डिलीवरी डिलीवरी ट्रैकिंग (सुरक्षित)": "आपका अमेज़न ऑर्डर #112-9281928 आज डिलीवरी के लिए निकल चुका है। आधिकारिक ऐप में ट्रैक करें।"
+    },
+    "te": {
+        "🏦 బ్యాంక్ ఖాతా బ్లాక్ & డిజిటల్ టోకెన్ ఫిషింగ్": "SBI / HDFC బ్యాంక్: మీ డిజిటల్ సెక్యూరిటీ టోకెన్ గడువు నేటితో ముగిసింది. ఖాతా శాశ్వతంగా బ్లాక్ అవ్వకుండా ఉండటానికి వెంటనే http://sbi-token-kyc.online లో లాగిన్ అయి యాక్టివేట్ చేయండి.",
+        "📦 పోస్టల్ పార్సెల్ కస్టమ్స్ డ్యూటీ మోసం": "ఇండియా పోస్ట్: కస్టమ్స్ డ్యూటీ ఫీజు ₹145 చెల్లించనందున మీ పార్సెల్ IN829102 నిలిపివేయబడింది. పార్సెల్ విడుదల చేయడానికి వెంటనే చెల్లించండి: http://indiapost-customs-track.top",
+        "💸 నకిలీ పర్సనల్ లోన్ & మనీ ట్రాన్స్‌ఫర్ మోసం": "తక్షణ పర్సనల్ లోన్ మంజూరైంది! మీ పేరుపై ₹1,00,000 లోన్ 1% వడ్డీతో ఆమోదించబడింది. వెంటనే లోన్ మొత్తం పొందడానికి ₹1,500 ప్రాసెసింగ్ ఫీజు చెల్లించండి: http://fast-loan-disbursement.vip",
+        "💼 వర్క్ ఫ్రమ్ హోమ్ పార్ట్ టైమ్ జాబ్ ఫ్రాడ్": "ఇంటి నుండే రోజుకు ₹5,000 - ₹15,000 సంపాదించండి! యూట్యూబ్ వీడియోలు లైక్ చేయండి & రేటింగ్ ఇవ్వండి. ఎటువంటి అనుభవం అవసరం లేదు. వెంటనే వాట్సాప్ చేయండి: +91 98214 44521",
+        "📈 క్రిప్టో 500% గ్యారెంటీడ్ రిటర్న్ పోంజీ స్కీమ్": "ప్రత్యేక VIP క్రిప్టో సిగ్నల్స్! AI ఆటోమేటెడ్ బాట్ ద్వారా 7 రోజుల్లో 300% నుండి 500% వరకు ఖచ్చితమైన లాభాలు. టెలిగ్రామ్ @in_crypto_vip లేదా http://crypto-vault-multiplier.live లో చేరండి.",
+        "⚖️ పోలీస్ అరెస్ట్ వారెంట్ & మనీలాండరింగ్ బెదిరింపు": "పోలీస్ హెడ్‌క్వార్టర్స్ నోటీసు: మనీలాండరింగ్ కేసులో మీ ఆధార్ నంబర్‌పై అరెస్ట్ వారెంట్ జారీ చేయబడింది. వెంటనే ఇన్‌స్పెక్టర్ వర్మతో +91 80212 90123 లో మాట్లాడండి.",
+        "💻 మైక్రోసాఫ్ట్ సెక్యూరిటీ వైరస్ అలర్ట్": "మైక్రోసాఫ్ట్ సెక్యూరిటీ హెచ్చరిక: మీ కంప్యూటర్‌లో ప్రమాదకరమైన ట్రోజన్ వైరస్ గుర్తించబడింది! మీ బ్యాంక్ వివరాలు లీక్ అవుతున్నాయి. వెంటనే టోల్-ఫ్రీ నంబర్ +1-800-419-0921 కి కాల్ చేయండి.",
+        "🟢 నిజమైన బ్యాంక్ ఓటీపీ (సురక్షితం)": "మీ నెట్ బ్యాంకింగ్ లాగిన్ కోసం ఓటీపీ (OTP) 829104. ఇది 3 నిమిషాల వరకు మాత్రమే చెల్లుబాటు అవుతుంది. మీ ఓటీపీని ఎవరితోనూ (బ్యాంక్ అధికారులతో సహా) పంచుకోవద్దు.",
+        "🟢 నిజమైన కొరియర్ డెలివరీ సందేశం (సురక్షితం)": "మీ అమెజాన్ ఆర్డర్ #402-9182918 ఈరోజు డెలివరీ చేయబడుతుంది. అధికారిక అమెజాన్ యాప్‌లో ట్రాక్ చేయండి.",
+        "🟢 వ్యక్తిగత సాధారణ సందేశం (సురక్షితం)": "హలో! రేపు మధ్యాహ్నం 1:00 గంటకు లంచ్ కోసం కలుస్తున్నామా? నాకు మెసేజ్ చేయి."
     }
 }
 
@@ -324,126 +341,6 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "pref_preview_text": "Sample ScamShield Intercept Warning across all supported regional languages:"
     },
 
-    "zh": {
-        # App Header & Metadata
-        "app_title": "🛡️ ScamShield 全方位多渠道网络反诈防御系统",
-        "app_subtitle": "实时监测、智能剖析并拦截跨短信、WhatsApp、Telegram、钓鱼邮件及剪贴板的欺诈攻击。",
-        "sidebar_title": "🛡️ ScamShield AI 卫士",
-        "sidebar_desc": "**自主多通道反诈中枢**\n全天候防护公民免受短信钓鱼、WhatsApp 欺诈群发、钓鱼邮件与恶意剪贴板威胁。",
-        "core_engine": "核心引擎状态",
-        "channels_protected": "已受保护渠道：",
-        "channel_sms": "💬 短信与伪基站拦截 (Smishing)",
-        "channel_wa": "📱 WhatsApp 通知拦截护卫",
-        "channel_tg": "✈️ Telegram 频道与机器人监控",
-        "channel_email": "📧 钓鱼邮件与商业欺诈 (BEC)",
-        "channel_clip": "📋 剪贴板与恶意链接预警",
-        "channel_qr": "📷 二维码钓鱼 (Quishing) 审计",
-        "sidebar_caption": "灵感源自新加坡 ScamShield 反诈倡议。专为网络安全工程师打造。",
-        "lang_selector": "🌐 语言偏好设置 / Language Preferences",
-
-        # Tabs
-        "tab_sms": "🔍 短信风险扫描器",
-        "tab_wa": "📱 WhatsApp 拦截防护",
-        "tab_tg": "✈️ Telegram 监控卫士",
-        "tab_email": "📧 钓鱼邮件深度扫描",
-        "tab_clip": "📋 剪贴板实时拦截护盾",
-        "tab_qr": "📷 二维码钓鱼 (Quishing) 审计",
-        "tab_prefs": "⚙️ 语言与本地化偏好设置",
-        "tab_challenge": "🏆 NLP 挑战赛与排行榜",
-        "tab_api": "🔌 多通道 REST API 文档",
-
-        # Common Actions & Metrics
-        "load_scenario": "加载测试案例：",
-        "custom_input": "-- 自定义输入 --",
-        "message_to_inspect": "待分析的消息文本：",
-        "run_deep_scan": "🚀 执行深度威胁扫描",
-        "analyzing": "正在分析特征向量与欺诈域名基础设施...",
-        "risk_score": "风险评分",
-        "classification": "研判分类",
-        "scam_probability": "欺诈概率",
-        "tactics_detected_header": "🚨 诱导欺诈心理手段 (社会工程学)",
-        "extracted_urls_header": "🌐 提取的网址与基础设施风险审查",
-        "safety_checklist_header": "🛡️ 权威防诈安全指导指引",
-        "no_tactics": "未检测到掠夺性社会工程诱骗手段。",
-        "no_urls": "未发现外部可疑链接。",
-        "threat_level": "威胁等级",
-        "typology": "诈骗类型",
-        "action_taken": "处置策略",
-
-        # WhatsApp Guardian Tab
-        "wa_title": "📱 WhatsApp 垃圾通知与诈骗群拦截卫士",
-        "wa_desc": "实时拦截 WhatsApp 传入通知，核验发件人号码与话术特征，生成高危告警卡片并自动构建警告回复。",
-        "wa_sender_name": "发件人显示昵称：",
-        "wa_sender_num": "发件人电话号码：",
-        "wa_is_group": "是否为群聊消息？",
-        "wa_group_name": "群组名称（如适用）：",
-        "wa_body": "收到的 WhatsApp 消息正文：",
-        "wa_sim_btn": "⚡ 模拟接收 WhatsApp 消息",
-        "wa_sim_header": "📲 模拟手机端实时通知",
-        "wa_intercept_alert": "WHATSAPP 威胁拦截警报",
-        "wa_safe_notice": "WHATSAPP 通知（安全正常）",
-        "wa_auto_reply_header": "🤖 自动生成的安全警告回复：",
-
-        # Telegram Guardian Tab
-        "tg_title": "✈️ Telegram 垃圾群发、假冒机器人与拉盘骗局监控",
-        "tg_desc": "监控 Telegram 频道广播、VIP 投资群组以及机器人对话，防御虚假加密货币拉盘与赠送陷阱。",
-        "tg_user": "Telegram 用户名 / 机器人账号：",
-        "tg_is_bot": "发件人属于 Telegram 机器人",
-        "tg_chat": "群聊 / 频道标题：",
-        "tg_is_channel": "属于公开频道广播",
-        "tg_body": "Telegram 消息正文：",
-        "tg_btn": "✈️ 深度研判 Telegram 消息",
-        "tg_auto_reply_header": "🤖 超级群组自动化预警提示：",
-
-        # Email Phishing Scanner Tab
-        "em_title": "📧 钓鱼邮件与企业高管冒充 (BEC) 扫描器",
-        "em_desc": "精准识别 CEO 伪造欺诈、虚假发票、发件人与回复域名不一致及凭证窃取邮件。",
-        "em_sender": "发件人邮箱地址：",
-        "em_reply_to": "回复邮箱 (Reply-To) 标头：",
-        "em_subject": "邮件主题：",
-        "em_body": "邮件正文内容：",
-        "em_btn": "🛡️ 执行邮件安全性审计",
-        "em_risk_score": "邮件综合风险分",
-        "em_domain_mismatch": "域名标头伪造",
-        "em_verdict": "邮件判定结论",
-        "em_anomalies": "🚨 检测到的具体异常项：",
-        "em_urls": "🌐 邮件内嵌可疑超链接：",
-
-        # Clipboard Guard Tab
-        "clip_title": "📋 剪贴板与浏览器实时防钓鱼护盾",
-        "clip_desc": "监控从浏览器或聊天工具复制的文本与网址，在用户误点击或粘贴前抢先阻断欺诈行为。",
-        "clip_input": "测试剪贴板捕获动作（粘贴或输入从浏览器/聊天复制的文字）：",
-        "clip_btn": "⚡ 测试剪贴板实时拦截",
-        "clip_alert_header": "📋 剪贴板卫士紧急拦截！",
-        "clip_safe": "✅ 剪贴板内容分析完成：未发现已知钓鱼或网络诈骗模式。",
-        "clip_recommendation": "🛑 安全建议：严禁在浏览器中打开或粘贴此内容中的任何网址链接。",
-
-        # Quishing Tab
-        "qr_title": "📷 二维码钓鱼 (Quishing) 与视觉诱饵扫描器",
-        "qr_desc": "审查公共停车收费桩覆盖贴纸、假冒公用事业账单、以及伪造的 PayNow / SGQR 二维码。",
-        "qr_source": "来源场景环境：",
-        "qr_loc": "案发地理标签：",
-        "qr_payload": "解码后的二维码网址或文字载荷：",
-        "qr_btn": "📷 审计二维码有效载荷",
-        "qr_action": "处置指导",
-        "qr_domain_audit": "🌐 域名网络安全审计：",
-        "qr_prevention": "🛡️ 二维码钓鱼防御权威指引：",
-
-        # Preferences Tab
-        "pref_title": "⚙️ 语言与本地化偏好设置",
-        "pref_desc": "定制系统显示语言、预设测试案例、多语言告警模版与自动语言侦测功能。",
-        "pref_ui_lang": "当前系统显示语言：",
-        "pref_auto_detect": "启用输入消息语言自适应侦测 (AI Heuristic)",
-        "pref_auto_detect_help": "开启后，ScamShield 将自动判断传入消息的语言类型（中/英/马/泰米尔/印地语）并适配匹配的防诈逻辑。",
-        "pref_reply_mode": "防御卫士自动回复警告语言模式：",
-        "pref_reply_opt_preferred": "匹配当前显示语言",
-        "pref_reply_opt_en": "始终为英语 (国际通用标准)",
-        "pref_reply_opt_bilingual": "双语对照模式 (英语 + 当前所选语言)",
-        "pref_save_btn": "💾 保存并应用语言偏好设置",
-        "pref_saved_msg": "✅ 语言偏好设置已成功持久化保存！",
-        "pref_preview_header": "🔍 实时多语言告警卡片预览",
-        "pref_preview_text": "ScamShield 针对各区域语言生成的统一拦截警告展示："
-    },
 
     "ms": {
         # App Header & Metadata
@@ -643,6 +540,126 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "pref_saved_msg": "✅ भाषा प्राथमिकताएं सफलतापूर्वक सहेज ली गईं!",
         "pref_preview_header": "🔍 रीयल-टाइम मल्टी-लैंग्वेज चेतावनी पूर्वावलोकन",
         "pref_preview_text": "विभिन्न क्षेत्रीय भाषाओं में ScamShield द्वारा जारी अलर्ट का उदाहरण:"
+    },
+    "te": {
+        # App Header & Metadata
+        "app_title": "🛡️ ScamShield బహుళ-మార్గాల సైబర్ మోసాల రక్షణ వ్యవస్థ",
+        "app_subtitle": "ఎస్ఎంఎస్, వాట్సాప్, టెలిగ్రామ్ మరియు ఈమెయిల్ ద్వారా వచ్చే సైబర్ మోసాలను రియల్-టైమ్‌లో గుర్తించి నిరోధించండి.",
+        "sidebar_title": "🛡️ ScamShield AI రక్షకుడు",
+        "sidebar_desc": "**స్వయంప్రతిపత్తి గల బహుళ-మార్గాల సైబర్ రక్షణ**\nఎస్ఎంఎస్, వాట్సాప్ నోటిఫికేషన్లు, టెలిగ్రామ్ మరియు ఫిషింగ్ ఈమెయిళ్ల నుండి పౌరులకు రక్షణ.",
+        "core_engine": "కోర్ ఇంజిన్ స్థితి",
+        "channels_protected": "రక్షించబడుతున్న మార్గాలు:",
+        "channel_sms": "💬 ఎస్ఎంఎస్ / స్మిషింగ్ రక్షణ",
+        "channel_wa": "📱 వాట్సాప్ నోటిఫికేషన్ గార్డియన్",
+        "channel_tg": "✈️ టెలిగ్రామ్ ఛానల్ & బాట్ గార్డ్",
+        "channel_email": "📧 ఈమెయిల్ ఫిషింగ్ & BEC స్కానర్",
+        "channel_clip": "📋 క్లిప్‌బోర్డ్ లింక్ గార్డ్",
+        "channel_qr": "📷 క్విషింగ్ (QR కోడ్) ఆడిట్",
+        "sidebar_caption": "సైబర్ భద్రతా ఇంజనీర్ల కోసం రూపొందించబడింది.",
+        "lang_selector": "🌐 భాషా ప్రాధాన్యతలు / Language Preferences",
+
+        # Tabs
+        "tab_sms": "🔍 ఎస్ఎంఎస్ సందేశాల స్కానర్",
+        "tab_wa": "📱 వాట్సాప్ గార్డియన్",
+        "tab_tg": "✈️ టెలిగ్రామ్ గార్డియన్",
+        "tab_email": "📧 ఈమెయిల్ ఫిషింగ్ స్కానర్",
+        "tab_clip": "📋 క్లిప్‌బోర్డ్ & బ్రౌజర్ షీల్డ్",
+        "tab_qr": "📷 క్విషింగ్ (QR కోడ్) ఆడిట్",
+        "tab_prefs": "⚙️ భాష & స్థానికీకరణ ప్రాధాన్యతలు",
+        "tab_challenge": "🏆 NLP ఛాలెంజ్ & లీడర్‌బోర్డ్",
+        "tab_api": "🔌 బహుళ-మార్గాల REST API",
+
+        # Common Actions & Metrics
+        "load_scenario": "పరీక్ష దృష్టాంతాన్ని ఎంచుకోండి:",
+        "custom_input": "-- సొంత ఇన్పుట్ రాయండి --",
+        "message_to_inspect": "తనిఖీ చేయవలసిన సందేశం టెక్స్ట్:",
+        "run_deep_scan": "🚀 లోతైన విశ్లేషణ ప్రారంభించండి",
+        "analyzing": "సందేశం మరియు డొమైన్ భద్రతను విశ్లేషిస్తోంది...",
+        "risk_score": "ప్రమాద స్కోరు",
+        "classification": "వర్గీకరణ",
+        "scam_probability": "మోసం సంభావ్యత",
+        "tactics_detected_header": "🚨 గుర్తించబడిన సోషల్ ఇంజనీరింగ్ వ్యూహాలు",
+        "extracted_urls_header": "🌐 వెలికితీసిన లింకులు & డొమైన్ ఆడిట్",
+        "safety_checklist_header": "🛡️ భద్రతా మార్గదర్శకాలు & చెక్‌లిస్ట్",
+        "no_tactics": "ఎటువంటి దురుద్దేశపూరిత సోషల్ ఇంజనీరింగ్ వ్యూహాలు గుర్తించబడలేదు.",
+        "no_urls": "ఎటువంటి బాహ్య లింకులు కనుగొనబడలేదు.",
+        "threat_level": "ప్రమాద స్థాయి",
+        "typology": "మోసం రకం",
+        "action_taken": "తీసుకున్న చర్య",
+
+        # WhatsApp Guardian Tab
+        "wa_title": "📱 వాట్సాప్ స్పామ్ & నోటిఫికేషన్ గార్డియన్",
+        "wa_desc": "వాట్సాప్ సందేశాలను రియల్-టైమ్‌లో తనిఖీ చేసి, మోసపూరిత లింకులను హెచ్చరించి, ఆటోమేటిక్ వార్నింగ్ మెసేజ్ రూపొందిస్తుంది.",
+        "wa_sender_name": "పంపినవారి పేరు:",
+        "wa_sender_num": "ఫోన్ నంబర్:",
+        "wa_is_group": "గ్రూప్ సందేశమా?",
+        "wa_group_name": "గ్రూప్ పేరు (ఉంటే):",
+        "wa_body": "వాట్సాప్ సందేశం టెక్స్ట్:",
+        "wa_sim_btn": "⚡ వాట్సాప్ సందేశాన్ని అనుకరించండి",
+        "wa_sim_header": "📲 మొబైల్ నోటిఫికేషన్ ప్రివ్యూ",
+        "wa_intercept_alert": "వాట్సాప్ ముప్పు హెచ్చరిక",
+        "wa_safe_notice": "వాట్సాప్ నోటిఫికేషన్ (సురక్షితం)",
+        "wa_auto_reply_header": "🤖 ఆటోమేటిక్ భద్రతా హెచ్చరిక సమాధానం:",
+
+        # Telegram Guardian Tab
+        "tg_title": "✈️ టెలిగ్రామ్ స్పామ్, బాట్ & క్రిప్టో మోసాల గార్డియన్",
+        "tg_desc": "టెలిగ్రామ్ ఛానళ్లు, బాట్‌లు మరియు క్రిప్టో ఇన్వెస్ట్‌మెంట్ సందేశాలను నిరంతరం పర్యవేక్షిస్తుంది.",
+        "tg_user": "టెలిగ్రామ్ యూజర్‌నేమ్ / బాట్ హ్యాండిల్:",
+        "tg_is_bot": "పంపినవారు టెలిగ్రామ్ బాట్",
+        "tg_chat": "ఛానల్ / గ్రూప్ పేరు:",
+        "tg_is_channel": "పబ్లిక్ ఛానల్ బ్రాడ్‌కాస్ట్",
+        "tg_body": "టెలిగ్రామ్ సందేశం:",
+        "tg_btn": "✈️ టెలిగ్రామ్ సందేశాన్ని తనిఖీ చేయండి",
+        "tg_auto_reply_header": "🤖 ఆటోమేటెడ్ సూపర్ గ్రూప్ హెచ్చరిక సమాధానం:",
+
+        # Email Phishing Scanner Tab
+        "em_title": "📧 ఈమెయిల్ ఫిషింగ్ & కార్పొరేట్ మోసాల స్కానర్",
+        "em_desc": "నకిలీ ఇన్వాయిస్‌లు, ఎగ్జిక్యూటివ్ స్పూఫింగ్, మిస్‌మ్యాచ్ డొమైన్‌లు మరియు పాస్‌వర్డ్ దొంగతనం ఈమెయిళ్లను గుర్తిస్తుంది.",
+        "em_sender": "పంపినవారి ఈమెయిల్ అడ్రస్:",
+        "em_reply_to": "రిప్లై-టు (Reply-To) హెడర్:",
+        "em_subject": "విషయం (Subject):",
+        "em_body": "ఈమెయిల్ బాడీ కంటెంట్:",
+        "em_btn": "🛡️ ఈమెయిల్ భద్రతను తనిఖీ చేయండి",
+        "em_risk_score": "ఈమెయిల్ ప్రమాద స్కోరు",
+        "em_domain_mismatch": "డొమైన్ అసమతుల్యత",
+        "em_verdict": "ఫిషింగ్ తీర్పు",
+        "em_anomalies": "🚨 గుర్తించబడిన అనుమానాస్పద అంశాలు:",
+        "em_urls": "🌐 అనుమానాస్పద లింకులు:",
+
+        # Clipboard Guard Tab
+        "clip_title": "📋 రియల్-టైమ్ క్లిప్‌బోర్డ్ & బ్రౌజర్ షీల్డ్",
+        "clip_desc": "బ్రౌజర్లు లేదా చాట్ నుండి కాపీ చేసిన టెక్స్ట్ మరియు లింకులను పర్యవేక్షిస్తుంది. ప్రమాదకరమైన లింకులను వెంటనే నిరోధిస్తుంది.",
+        "clip_input": "క్లిప్‌బోర్డ్ టెక్స్ట్‌ను ఇక్కడ పేస్ట్ చేయండి:",
+        "clip_btn": "⚡ క్లిప్‌బోర్డ్‌ను పరీక్షించండి",
+        "clip_alert_header": "📋 క్లిప్‌బోర్డ్ గార్డియన్ ముప్పు హెచ్చరిక!",
+        "clip_safe": "✅ క్లిప్‌బోర్డ్ కంటెంట్ విశ్లేషించబడింది: ఎటువంటి ఫిషింగ్ లేదా మోసం కనిపించలేదు.",
+        "clip_recommendation": "🛑 సిఫార్సు: ఈ లింకులను మీ బ్రౌజర్‌లో తెరవవద్దు లేదా పేస్ట్ చేయవద్దు.",
+
+        # Quishing Tab
+        "qr_title": "📷 క్విషింగ్ (QR కోడ్ ఫిషింగ్) & విజువల్ ల్యూర్ స్కానర్",
+        "qr_desc": "నకిలీ పేమెంట్ స్టిక్కర్లు, పార్కింగ్ ఫీజు మోసాలు మరియు అనుమానాస్పద క్యూఆర్ కోడ్ లింకులను ఆడిట్ చేస్తుంది.",
+        "qr_source": "క్యూఆర్ కోడ్ మూలం:",
+        "qr_loc": "సంఘటన ప్రదేశం:",
+        "qr_payload": "డీకోడ్ చేసిన క్యూఆర్ కోడ్ URL లేదా టెక్స్ట్:",
+        "qr_btn": "📷 క్యూఆర్ కోడ్ పేలోడ్‌ను ఆడిట్ చేయండి",
+        "qr_action": "అవసరమైన చర్య",
+        "qr_domain_audit": "🌐 డొమైన్ భద్రతా ఆడిట్:",
+        "qr_prevention": "🛡️ క్యూఆర్ ఫిషింగ్ నివారణ మార్గదర్శకాలు:",
+
+        # Preferences Tab
+        "pref_title": "⚙️ భాష & స్థానికీకరణ ప్రాధాన్యతలు",
+        "pref_desc": "సిస్టమ్ భాష, నోటిఫికేషన్ అనువాదాలు, ఆటోమేటిక్ రిప్లై విధానం మరియు ప్రాంతీయ రక్షణ ప్రాధాన్యతలను మార్చుకోండి.",
+        "pref_ui_lang": "ప్రదర్శన భాష (Active Display Language):",
+        "pref_auto_detect": "సందేశాల భాషను ఆటోమేటిక్‌గా గుర్తించు (AI Heuristic)",
+        "pref_auto_detect_help": "ఇది ఆన్‌లో ఉంటే, వచ్చే సందేశం ఏ భాషలో ఉందో ScamShield స్వయంచాలకంగా గుర్తించి తగిన నిబంధనలను వర్తింపజేస్తుంది.",
+        "pref_reply_mode": "గార్డియన్ ఆటోమేటిక్ హెచ్చరిక రిప్లై భాష:",
+        "pref_reply_opt_preferred": "ప్రస్తుత ప్రదర్శన భాష ప్రకారం",
+        "pref_reply_opt_en": "ఎల్లప్పుడూ ఆంగ్లం (English)",
+        "pref_reply_opt_bilingual": "ద్విభాషా (ఆంగ్లం + ఎంచుకున్న భాష)",
+        "pref_save_btn": "💾 భాషా ప్రాధాన్యతలను సేవ్ చేయండి",
+        "pref_saved_msg": "✅ భాషా ప్రాధాన్యతలు విజయవంతంగా సేవ్ చేయబడ్డాయి!",
+        "pref_preview_header": "🔍 ప్రత్యక్ష బహుళ-భాషా హెచ్చరిక ప్రివ్యూ",
+        "pref_preview_text": "మద్దతు ఉన్న ప్రాంతీయ భాషలలో ScamShield హెచ్చరిక ఉదాహరణ:"
     }
 }
 
@@ -653,69 +670,93 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
 CATEGORY_LABELS: Dict[str, Dict[str, str]] = {
     "bank_impersonation": {
         "en": "Bank Impersonation",
-        "zh": "银行冒充钓鱼诈骗",
         "ms": "Penyamaran Bank",
         "ta": "வங்கி ஆள்மாறாட்டம்",
-        "hi": "बैंक प्रतिरूपण धोखाधड़ी"
+        "hi": "बैंक प्रतिरूपण धोखाधड़ी",
+        "te": "బ్యాంక్ వేషధారణ / ఫిషింగ్"
     },
     "parcel_delivery": {
         "en": "Parcel Delivery Fraud",
-        "zh": "包裹快递关税诈骗",
         "ms": "Penipuan Penghantaran Bungkusan",
         "ta": "பார்சல் விநியோக மோசடி",
-        "hi": "पार्सल डिलीवरी फ्रॉड"
+        "hi": "पार्सल डिलीवरी फ्रॉड",
+        "te": "పార్సెల్ కొరియర్ డెలివరీ మోసం"
+    },
+    "delivery_fraud": {
+        "en": "Parcel Delivery Fraud",
+        "ms": "Penipuan Penghantaran Bungkusan",
+        "ta": "பார்சல் விநியோக மோசடி",
+        "hi": "पार्सल डिलीवरी फ्रॉड",
+        "te": "పార్సెల్ కొరియర్ డెలివరీ మోసం"
     },
     "recruitment_job": {
         "en": "Fake Job Recruitment",
-        "zh": "兼职刷单虚假招聘",
         "ms": "Penipuan Kerja Sambilan",
         "ta": "போலி வேலைவாய்ப்பு மோசடி",
-        "hi": "फर्जी नौकरी घोटाला"
+        "hi": "फर्जी नौकरी घोटाला",
+        "te": "నకిలీ పార్ట్ టైమ్ జాబ్ మోసం"
+    },
+    "job_scam": {
+        "en": "Fake Job & Task Recruitment",
+        "ms": "Penipuan Kerja Sambilan & Tugasan",
+        "ta": "போலி வேலை & பணி மோசடி",
+        "hi": "फर्जी नौकरी व कार्य घोटाला",
+        "te": "నకిలీ జాబ్ & టాస్క్ మోసం"
+    },
+    "money_scam": {
+        "en": "Money Scam / Fake Loan Fraud",
+        "ms": "Penipuan Wang & Pinjaman Palsu",
+        "ta": "பண மோசடி / போலி கடன் மோசடி",
+        "hi": "पैसा व फर्जी लोन घोटाला",
+        "te": "డబ్బు మోసం / నకిలీ లోన్ ఫ్రాడ్"
     },
     "investment_crypto": {
         "en": "Crypto / Investment Scheme",
-        "zh": "高利虚拟货币投资陷阱",
         "ms": "Penipuan Pelaburan Kripto",
         "ta": "கிரிப்டோ முதலீட்டு மோசடி",
-        "hi": "क्रिप्टो व निवेश पोंजी स्कीम"
+        "hi": "क्रिप्टो व निवेश पोंजी स्कीम",
+        "te": "క్రిప్టో & పెట్టుబడి పోంజీ స్కీమ్"
     },
     "government_police": {
         "en": "Government / Police Threat",
-        "zh": "假冒公检法洗钱威胁",
         "ms": "Penyamaran Polis / Kerajaan",
         "ta": "அரசு / காவல்துறை மிரட்டல்",
-        "hi": "पुलिस / सरकारी प्रतिरूपण"
+        "hi": "पुलिस / सरकारी प्रतिरूपण",
+        "te": "పోలీస్ / ప్రభుత్వ బెదిరింపు"
     },
     "tech_support": {
         "en": "Tech Support Scam",
-        "zh": "假冒电脑技术支持",
         "ms": "Penipuan Sokongan Teknikal",
         "ta": "தொழில்நுட்ப ஆதரவு மோசடி",
-        "hi": "टेक सपोर्ट फ्रॉड"
+        "hi": "टेक सपोर्ट फ्रॉड",
+        "te": "నకిలీ టెక్ సపోర్ట్ మోసం"
     },
     "lottery_prize": {
         "en": "Lottery / Prize Scam",
-        "zh": "虚假抽奖中奖陷阱",
         "ms": "Penipuan Hadiah Loteri",
         "ta": "லாட்டரி / பரிசு மோசடி",
-        "hi": "लॉटरी / इनाम घोटाला"
+        "hi": "लॉटरी / इनाम घोटाला",
+        "te": "లాటరీ / బహుమతి మోసం"
+    },
+    "lottery_reward": {
+        "en": "Lottery / Prize Reward Scam",
+        "ms": "Penipuan Ganjaran & Hadiah Loteri",
+        "ta": "லாட்டரி / பரிசு வெகுமதி மோசடி",
+        "hi": "लॉटरी व इनाम पुरस्कार घोटाला",
+        "te": "లాటరీ / బహుమతి రివార్డ్ మోసం"
     },
     "legitimate": {
         "en": "Legitimate / Ham",
-        "zh": "安全正常通讯 (Ham)",
         "ms": "Mesej Sah / Selamat",
         "ta": "முறையான செய்தி (பாதுகாப்பானது)",
-        "hi": "वैध संदेश (सुरक्षित)"
+        "hi": "वैध संदेश (सुरक्षित)",
+        "te": "సురక్షితమైన సాధారణ సందేశం (Ham)"
     }
 }
 
 TACTICS_TRANSLATIONS: Dict[str, Dict[str, Dict[str, str]]] = {
     "Artificial Urgency & Coercion": {
-        "zh": {
-            "name": "人为制造紧迫感与强迫恐吓",
-            "desc": "利用时间紧迫感或法律/账户冻结威胁，迫使受害者在未经审慎思考的情况下仓促行事。"
-        },
-        "ms": {
+            "ms": {
             "name": "Tekanan Masa & Paksaan Palsu",
             "desc": "Menggunakan tekanan masa atau ancaman tindakan undang-undang/pembekuan akaun untuk memaksa mangsa bertindak terburu-buru."
         },
@@ -726,14 +767,14 @@ TACTICS_TRANSLATIONS: Dict[str, Dict[str, Dict[str, str]]] = {
         "hi": {
             "name": "झूठी तात्कालिकता व भय पैदा करना",
             "desc": "खाता ब्लॉक या कानूनी कार्रवाई का डर दिखाकर पीड़ित को बिना सोचे-समझे जल्दबाजी में कदम उठाने पर मजबूर करना।"
+        },
+        "te": {
+            "name": "కృత్రిమ అత్యవసరత & అరెస్ట్ బెదిరింపు",
+            "desc": "ఖాతా రద్దు లేదా చట్టపరమైన అరెస్ట్ భయాన్ని సృష్టించి బాధితుడిని తొందరపాటు నిర్ణయాలు తీసుకునేలా ఒత్తిడి చేయడం."
         }
     },
     "Financial Bait / Greed Trap": {
-        "zh": {
-            "name": "高额经济利益诱饵 / 贪婪陷阱",
-            "desc": "承诺不切实际的丰厚报酬、保本高收益或虚假大奖，诱骗受害者上钩。"
-        },
-        "ms": {
+            "ms": {
             "name": "Umpan Kewangan / Perangkap Tamak",
             "desc": "Menjanjikan pulangan wang lumayan yang tidak realistik atau hadiah besar untuk memerangkap mangsa."
         },
@@ -744,14 +785,14 @@ TACTICS_TRANSLATIONS: Dict[str, Dict[str, Dict[str, str]]] = {
         "hi": {
             "name": "वित्तीय प्रलोभन व भारी मुनाफे का लालच",
             "desc": "अवास्तविक दैनिक कमाई, लॉटरी या गारंटीड रिटर्न का झांसा देकर पीड़ित को फंसाना।"
+        },
+        "te": {
+            "name": "ఆర్థిక ఎర / భారీ లాభాల వల",
+            "desc": "అసాధారణమైన రోజువారీ రాబడి, గ్యారెంటీడ్ లాభాలు లేదా నకిలీ లాటరీ ద్వారా మోసగించడం."
         }
     },
     "Credential & Fee Harvesting": {
-        "zh": {
-            "name": "个人身份凭据与资金索要",
-            "desc": "索取受害者的银行动态口令(OTP)、登录密码、身份识别信息或要求垫付各类清关手续费。"
-        },
-        "ms": {
+            "ms": {
             "name": "Pencurian Kredensial & Bayaran Palsu",
             "desc": "Meminta kata laluan perbankan, nombor OTP, atau bayaran pendahuluan untuk melepaskan barangan/akaun."
         },
@@ -762,14 +803,14 @@ TACTICS_TRANSLATIONS: Dict[str, Dict[str, Dict[str, str]]] = {
         "hi": {
             "name": "क्रेडेंशियल, ओटीपी व शुल्क उगाही",
             "desc": "व्यक्तिगत क्रेडेंशियल, पासवर्ड, बैंक ओटीपी या अनपेक्षित फीस/कस्टम शुल्क की मांग करना।"
+        },
+        "te": {
+            "name": "ఓటీపీ, పాస్‌వర్డ్ & ఫీజు దోపిడీ",
+            "desc": "బ్యాంక్ ఓటీపీ (OTP), రహస్య పాస్‌వర్డ్ లేదా అక్రమ కస్టమ్స్ డ్యూటీ చెల్లింపులను డిమాండ్ చేయడం."
         }
     },
     "Deceptive Infrastructure": {
-        "zh": {
-            "name": "欺诈性网络域名与仿冒基础设施",
-            "desc": "使用仿冒知名品牌的虚假域名、恶意顶级后缀或直接IP地址伪装成正规官方门户。"
-        },
-        "ms": {
+            "ms": {
             "name": "Infrastruktur Domain Menipu",
             "desc": "Menggunakan domain yang menyerupai jenama rasmi, TLD mencurigakan, atau alamat IP langsung."
         },
@@ -780,6 +821,46 @@ TACTICS_TRANSLATIONS: Dict[str, Dict[str, Dict[str, str]]] = {
         "hi": {
             "name": "धोखेबाज डोमेन व फर्जी इन्फ्रास्ट्रक्चर",
             "desc": "असली बैंक या सरकारी ब्रांड की नकल करने वाले फर्जी डोमेन, डायरेक्ट आईपी या संदिग्ध लिंक का उपयोग।"
+        },
+        "te": {
+            "name": "మోసపూరిత డొమైన్లు & నకిలీ వెబ్‌సైట్లు",
+            "desc": "అధికారిక బ్యాంక్ లేదా బ్రాండ్‌లను పోలిన నకిలీ డొమైన్‌లు లేదా ప్రమాదకరమైన లింకులను ఉపయోగించడం."
+        }
+    },
+    "Loan & Advance Fee Fraud / Money Trap": {
+            "ms": {
+            "name": "Penipuan Pinjaman & Yuran Pendahuluan",
+            "desc": "Menuntut yuran pemprosesan pinjaman awal atau menjanjikan penggandaan wang palsu."
+        },
+        "ta": {
+            "name": "கடன் & முன்கூட்டிய கட்டண மோசடி",
+            "desc": "முன்கூட்டியே கடன் செயலாக்க கட்டணம் கோருதல் அல்லது போலி பண இரட்டிப்பு வாக்குறுதி."
+        },
+        "hi": {
+            "name": "लोन व अग्रिम शुल्क धोखाधड़ी / मनी ट्रैप",
+            "desc": "लोन प्रोसेसिंग फीस की मांग, पैसे दोगुना करने का लालच या अज्ञात खातों में पैसे ट्रांसफर करने का दबाव।"
+        },
+        "te": {
+            "name": "నకిలీ లోన్ & అడ్వాన్స్ ఫీజు మోసం",
+            "desc": "లోన్ ప్రాసెసింగ్ ఫీజు ముందుగా అడగడం లేదా డబ్బును రెట్టింపు చేస్తామని మోసగించడం."
+        }
+    },
+    "Deceptive Job & Task Solicitation": {
+            "ms": {
+            "name": "Penipuan Pekerjaan & Tugasan Palsu",
+            "desc": "Memikat mangsa dengan tawaran kerja sambilan palsu atau tugasan video berbayar."
+        },
+        "ta": {
+            "name": "போலி வேலைவாய்ப்பு & பணி தூண்டில்",
+            "desc": "வீடியோ லைக் அல்லது போலி ஆன்லைன் வேலைகள் மூலம் பணத்தை ஏமாற்றுதல்."
+        },
+        "hi": {
+            "name": "फर्जी नौकरी व कार्य प्रलोभन",
+            "desc": "घर बैठे वीडियो लाइक करने या टास्क पूरा करने के नाम पर पैसे की ठगी।"
+        },
+        "te": {
+            "name": "నకిలీ ఉద్యోగ ఎర & టాస్క్ మోసం",
+            "desc": "యూట్యూబ్ వీడియో లైక్స్ లేదా రివ్యూల పేరుతో బాధితులను ప్రలోభపెట్టడం."
         }
     }
 }
@@ -807,30 +888,11 @@ LOCALIZED_SAFETY_ADVICE: Dict[str, Dict[str, List[str]]] = {
         "job": [
             "💼 Legitimate companies will never hire via Telegram/WhatsApp to perform paid video likes or review tasks."
         ],
+        "money": [
+            "💸 Licensed lenders and banks NEVER solicit loans or demand upfront processing/clearance fees via WhatsApp or SMS."
+        ],
         "safe": [
             "✅ This message appears legitimate, but always exercise standard vigilance with incoming messages."
-        ]
-    },
-    "zh": {
-        "scam_general": [
-            "⚠️ 严禁点击此消息中的任何外部网址链接，切勿下载或打开任何附件。",
-            "🚫 绝不在任何非官方网页输入您的银行动态口令(OTP)、网银密码、Singpass 或信用卡卡号。",
-            "📢 请立即通过新加坡官方 ScamShield 应用程序或 scamshield.gov.sg 举报此诈骗消息。"
-        ],
-        "bank": [
-            "🏦 如需核实银行账户状态，请直接打开手机官方银行 App 进行查验，切勿信任短信内的重置或激活链接。"
-        ],
-        "parcel": [
-            "📦 查验包裹物流进度时，请直接访问邮政快递官方网站或 App，使用原始快递运单号查询。"
-        ],
-        "police": [
-            "🛡️ 新加坡警方、公检法或任何政府机关绝不会通过电话、短信或社交软件向公民索取资金转账或在线办案。"
-        ],
-        "job": [
-            "💼 正规企业绝不会通过 WhatsApp 或 Telegram 招募所谓“点赞视频”、“刷单返利”的高薪兼职人员。"
-        ],
-        "safe": [
-            "✅ 经分析此消息符合正常安全通讯特征，但对于包含支付或个人信息的请求仍应保持审慎核实。"
         ]
     },
     "ms": {
@@ -850,6 +912,9 @@ LOCALIZED_SAFETY_ADVICE: Dict[str, Dict[str, List[str]]] = {
         ],
         "job": [
             "💼 Syarikat sah tidak akan mengambil pekerja melalui WhatsApp untuk tugas seperti 'like video' berbayar."
+        ],
+        "money": [
+            "💸 Pemberi pinjaman wang berlesen TIDAK AKAN meminta bayaran yuran pendahuluan atau memproses pinjaman melalui SMS/WhatsApp."
         ],
         "safe": [
             "✅ Mesej ini kelihatan sah, tetapi sentiasa berwaspada dengan mesej yang meminta tindakan kewangan."
@@ -873,6 +938,9 @@ LOCALIZED_SAFETY_ADVICE: Dict[str, Dict[str, List[str]]] = {
         "job": [
             "💼 முறையான நிறுவனங்கள் வாட்ஸ்அப் மூலம் வீடியோ லைக் பணிகளை வழங்காது."
         ],
+        "money": [
+            "💸 உரிமம் பெற்ற நிதி நிறுவனங்கள் ஒருபோதும் வாட்ஸ்அப் அல்லது எஸ்எம்எஸ் மூலம் முன்கூட்டியே கட்டணம் கோர மாட்டார்கள்."
+        ],
         "safe": [
             "✅ இந்தச் செய்தி பாதுகாப்பானது எனத் தெரிகிறது, இருப்பினும் விழிப்புடன் இருக்கவும்."
         ]
@@ -895,8 +963,36 @@ LOCALIZED_SAFETY_ADVICE: Dict[str, Dict[str, List[str]]] = {
         "job": [
             "💼 वैध कंपनियां व्हाट्सएप या टेलीग्राम पर वीडियो लाइक करने के नाम पर घर बैठे कमाई का ऑफर नहीं देतीं।"
         ],
+        "money": [
+            "💸 वैध वित्तीय संस्थान या बैंक कभी भी व्हाट्सएप/एसएमएस पर बिना जांच के लोन देने या एडवांस फीस की मांग नहीं करते।"
+        ],
         "safe": [
             "✅ यह संदेश सुरक्षित प्रतीत होता है, फिर भी व्यक्तिगत जानकारी साझा करते समय सतर्कता बरतें।"
+        ]
+    },
+    "te": {
+        "scam_general": [
+            "⚠️ ఈ సందేశంలోని ఎటువంటి లింకులను క్లిక్ చేయవద్దు లేదా ఫైల్స్‌ను డౌన్‌లోడ్ చేయవద్దు.",
+            "🚫 మీ బ్యాంక్ ఓటీపీ (OTP), పాస్‌వర్డ్, యూపీఐ పిన్ లేదా ఆధార్ వివరాలను ఎవరికీ చెప్పవద్దు.",
+            "📢 అధికారిక సైబర్ క్రైమ్ పోర్టల్ లేదా ScamShield యాప్ ద్వారా ఈ మోసపూరిత సందేశాన్ని నివేదించండి."
+        ],
+        "bank": [
+            "🏦 మీ బ్యాంక్ ఖాతా వివరాలను తనిఖీ చేయడానికి నేరుగా అధికారిక బ్యాంక్ యాప్‌లో లాగిన్ అవ్వండి, సందేశంలోని లింకుల ద్వారా కాదు."
+        ],
+        "parcel": [
+            "📦 పార్సెల్ స్థితిని అధికారిక కొరియర్ వెబ్‌సైట్ లేదా యాప్‌లో మాత్రమే ఒరిజినల్ ట్రాకింగ్ నంబర్‌తో పరిశీలించండి."
+        ],
+        "police": [
+            "🛡️ పోలీసులు లేదా ప్రభుత్వ అధికారులు ఎప్పుడూ ఫోన్ కాల్స్ లేదా ఎస్ఎంఎస్ ద్వారా డిజిటల్ అరెస్ట్ చేయరు లేదా డబ్బు అడగరు."
+        ],
+        "job": [
+            "💼 గుర్తింపు పొందిన సంస్థలు వాట్సాప్ లేదా టెలిగ్రామ్ ద్వారా వీడియో లైక్స్ పేరుతో ఎక్కువ జీతం ఇచ్చే పనులను ఆఫర్ చేయవు."
+        ],
+        "money": [
+            "💸 చట్టబద్ధమైన బ్యాంకులు లేదా ఫైనాన్స్ సంస్థలు ఎప్పుడూ వాట్సాప్/ఎస్ఎంఎస్ ద్వారా లోన్ ప్రాసెసింగ్ ఫీజు ముందుగా అడగవు."
+        ],
+        "safe": [
+            "✅ ఈ సందేశం సురక్షితమైనదిగా కనిపిస్తోంది, అయినప్పటికీ వ్యక్తిగత వివరాలను పంచుకునేటప్పుడు జాగ్రత్త వహించండి."
         ]
     }
 }
@@ -930,6 +1026,11 @@ AUTO_REPLY_TEMPLATES: Dict[str, Dict[str, str]] = {
         "🛡️ [SCAMSHIELD साइबर सुरक्षा चेतावनी]\n"
         "सावधान: यह संदेश संभावित 【{category}】के रूप में चिन्हित किया गया है (जोखिम स्कोर: {risk_score}%)।\n"
         "अज्ञात लिंक पर क्लिक न करें, अपना बैंक ओटीपी साझा न करें और पैसे ट्रांसफर न करें।"
+    ),
+    "te": (
+        "🛡️ [SCAMSHIELD సైబర్ భద్రతా హెచ్చరిక]\n"
+        "హెచ్చరిక: ఈ సందేశం అనుమానాస్పద 【{category}】గా గుర్తించబడింది (ప్రమాద తీవ్రత: {risk_score}%).\n"
+        "బాహ్య లింకులను క్లిక్ చేయవద్దు; మీ బ్యాంక్ ఓటీపీ (OTP) లేదా డబ్బును ఎవరికీ పంపవద్దు."
     )
 }
 
@@ -1000,6 +1101,8 @@ def get_localized_safety_advice(category: str, is_scam: bool, risk_score: float,
             advice.extend(advice_dict.get("police", []))
         elif "job" in category or "recruitment" in category:
             advice.extend(advice_dict.get("job", []))
+        elif "money" in category or "loan" in category:
+            advice.extend(advice_dict.get("money", []))
     else:
         advice.extend(advice_dict.get("safe", []))
 
