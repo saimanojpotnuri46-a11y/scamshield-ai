@@ -72,13 +72,35 @@ if not os.path.exists(init_src):
     except Exception:
         pass
 
-# 4. Bidirectional Sync between root and src/
-for item in os.listdir(ROOT_DIR):
-    item_path = os.path.join(ROOT_DIR, item)
-    if os.path.isfile(item_path) and item.endswith(".py") and item != "streamlit_app.py":
-        dst_path = os.path.join(src_dir, item)
-        if not os.path.exists(dst_path):
-            try: shutil.copy2(item_path, dst_path)
-            except Exception: pass
+# 4. Bidirectional Sync between root and src/ (Indentation-Safe Function)
+def _sync_folders(s_dir, d_dir, exclude_names):
+    if os.path.exists(s_dir) and os.path.exists(d_dir):
+        for f in os.listdir(s_dir):
+            if f.endswith(".py") and f not in exclude_names:
+                sp = os.path.join(s_dir, f)
+                dp = os.path.join(d_dir, f)
+                if os.path.isfile(sp) and not os.path.exists(dp):
+                    try:
+                        shutil.copy2(sp, dp)
+                    except Exception:
+                        pass
 
-if os.path.exists(src_dir):
+_sync_folders(ROOT_DIR, src_dir, ["streamlit_app.py"])
+_sync_folders(src_dir, ROOT_DIR, ["__init__.py"])
+
+# 5. Helper to locate model & data folders
+def _resolve_dir(dirname: str) -> str:
+    candidates = [
+        os.path.join(ROOT_DIR, dirname),
+        os.path.join(src_dir, dirname),
+        os.path.join(os.path.dirname(ROOT_DIR), dirname),
+        os.path.join(os.getcwd(), dirname)
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    fallback = os.path.join(ROOT_DIR, dirname)
+    os.makedirs(fallback, exist_ok=True)
+    return fallback
+
+model_dir = _resolve_
